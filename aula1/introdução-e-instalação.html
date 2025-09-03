@@ -1,0 +1,159 @@
+<!--
+
+introdução sobre Tailwind:
+é uma estrutura css de baixo nivel altamentente personalizavel que forncece todos
+os blocos de construção de que voce precisa parar criar desigs sob medida, sem nenhum estilo opinativo 
+irritante que você precise lutar para iginorar.
+
+(crie um mini titulo)
+oque seria esse estilo opinativo?
+quando trabalhamos com bootstrap ou outro freamork, se quisemos alterarr
+sobrescrever alguam cor, alguam classe, vamos precisar utilizar sobrescrição de classe, 
+hierarquia de leitura, prioridade e usamos import e etc, essa hierarquia é o estilo
+opinativo e o Tailwind nao existe isso praticamente.
+
+
+oque é TailwindCSS?
+
+Tailwind CSS é basicamente um utility-first CSS frameword que prioriza a contrução
+ultra-rápida de interfaces customizadas. 
+
+(crie um mini titulo por que ainda se trata dessa explicação)
+oque é o utility-first?
+siginifica os atributos css como color, font-size, margin, padding e etc.
+cada atributo do css vai ter uma classe especial que representa esse atributo
+
+
+Componentes que iremos montar durante o curso:
+- componente drop dwom
+- componente input
+- componente Bdge/tag
+- componente de botão
+- componente card
+e entre outros.
+tamebm iremos montar uma tela de login bem simplis
+e o projeto final iremos montar um site completo de agencia de oteis.
+
+
+
+
+as principais caracteristicas do Tailwind é:
+utily-first:
+usando uma abordagem tradicional em que projetos personalizados
+exigem CSS personalizado. imaginasse que vamos criar uma caixa de aviso, nesse
+container damos margens para cada elemento, o  Tailwind veio para resolver isso,
+eu só preciso passar ele no container css que ele da margen e distribui ara todo o container,
+e quando trabalhamos com  Tailwind não saimos do html, não precisamos ja que fazemos tudo nas tags html.
+
+
+
+
+
+Design responsivo:
+Cada classe no Tailwind pode ser aplicada condicionalmente em diferentes breakpoints, oque torna muito facil 
+contruir interfaces responsivas complexas sem nuncar deixar seu htm.
+por exemplo:
+md:w-32
+todo essa linha é o nome da classe, mas entendemos que w-32 é o nome da classe e md: é o prefixo pra identificarmos
+a responsividade, o breakpoint, ou seja, aplique essa classe w-32 quando o breakpoint for md (md de midio) 
+outro exemplo:
+lg:w-48
+e a mesma coisa, sera aplicado a classe w-48 quando o breackpoint for lg: (lg de larg)
+
+um exemplo na pratica:
+<img class= "w-16 md:w-32 lg:w-48" src="...">
+
+explicação:
+w é o width, então a largura do md será aplicada de numero 32 quando chegar em tamanhos medios, 
+e a largura de 48 será aplicada quando chegar em tamanhos largos
+
+
+
+
+
+
+
+
+
+
+estados hover, focus..:
+estados com hover, focus, entre outros, são semelhante ao modo como o Tailwind lida com o design responsivo,
+estilizar elementos com hover, focus, etc. pode ser realizados prefixando com a variante de estado apropriada.
+para estados uamos os prefixos e alguns prefixos são como hover: focus e etc.
+
+exemplo:
+<input class="focus:ring-2 focus:ring-blue-600 hover:text-gray-300"
+
+explicação:
+o Tailwind existem varios tipos de prefixo e nesse caso temos o hover e o focus, 
+ou seja, quando clicamos no input ele ativa o focus e vai alterar as seguinte propriedades que passei, da mesma forma quando passar o mouse
+
+
+
+
+
+dark mode:
+trabalhar com dark mode está send uma tendencia grande no mercado e é muito simplis trabalhar com ele.
+
+dark mode é um recurso de muitos sistemas operacionais e está se torandno cada vez mais comum projetar uma versão 
+escura do seu sistema para acompanhar o design padrão do sistema operacional.
+
+o seu prefixo é dark: e o valor 
+
+exemplo:
+<div class="bg-white dark:bg-gray-800" >
+    <h1 class="text-gray-900 dark:text-white" > dark mode </h1>
+    <p class="text-gray-600 dark:text-gray-300"> texto </p>
+</div>   
+
+explicação:
+nesse caso, quando o sistema operacional estiver no modo noturno, ele vai ativar o background gray 800.
+
+
+
+
+classes customizadas:
+o Tailwind nós dá muita coisa gratuita, porem vai chegar um momento que iremos precisar criar nossas classes. 
+
+A maneira mais fácil de adicionar seus próprios utilitario ao Tailwind é simplismente adiciona-los ao seu css.
+
+
+
+
+
+por que não usar inline style?
+inline style é quando utilizamos o css na linha d elemento.
+
+1- o primeiro motivo e não poder usar media query no inline style,
+tambem não posso usar estados como hover: focus e etc, e tmbem no inlin style não tem padronização,
+ja no Tailwind temos uma mesma classe que vai servir todos os meus projetos.
+
+
+
+
+
+instalaão:
+passo a passo:
+1- primeiro preciso baixar o node js no site oficial.
+site oficial: https://nodejs.org/pt
+2- apos isntalar eu vou passar o comando node -v no terminal ou cmd e vai retornar a versão do node
+3- apos isos ja estamos apatos para inatalar o Tailwind,e pra isso iremos no seu site oficial.
+site oficial: https://tailwindcss.com/
+3- ja no site, é aconselhavel sempre seguir a documentação de instalação, pra isso, iremos em documentos ou docs e ir na parte de instalação, 
+e la terá varias formas de instalção, vite e etc, oque iremos usar instalar agora é o Tailwind CLI, que é o cliente de Tailwind.
+4- o comando do Tailwind CLI do video é: npx tailwindcss -o tailwind.css 
+dessa forma ele irar exportar todas as classes do tailwind e colocar nesse arquivo css
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
