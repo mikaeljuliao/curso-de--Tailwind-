@@ -1,0 +1,291 @@
+<!--
+nessa aula iremos falar sobre as bordas dos elementos.
+
+nesta aula não iremos abordar todos os tipos de bordas, mas iremos abordar as mais
+importante pelo menos.
+
+
+
+border-radius com tailwind:
+o seu prefixo é rounded- depois de passo - a posição, e o numero.
+
+O Tailwind fornece utilitários para arredondar os cantos dos elementos com border-radius.
+Essas classes se dividem em 3 categorias principais:
+
+1. Todos os cantos:
+
+Aplica border-radius em todos os lados do elemento.
+
+Classe	                       CSS gerado	                        Valor (rem / px)
+rounded-none	               border-radius: 0;	                0
+rounded-xs	                   border-radius: 0.125rem;	            2px
+rounded-sm	                   border-radius: 0.25rem;	            4px
+rounded-md	                   border-radius: 0.375rem;	            6px
+rounded-lg	                   border-radius: 0.5rem;	            8px
+rounded-xl	                   border-radius: 0.75rem;	            12px
+rounded-2xl	                   border-radius: 1rem;	                16px
+rounded-3xl	                   border-radius: 1.5rem;	            24px
+rounded-4xl	                   border-radius: 2rem;	                32px
+rounded-full	               border-radius: 9999px; (círculo)	     –
+
+👉 Exemplos práticos:
+. rounded-lg → caixas com cantos arredondados.
+. rounded-full → transforma elementos quadrados em círculos (ex: avatar).
+
+
+
+2. Metades (sides)
+
+Aplica arredondamento em um lado inteiro (esquerda, direita, topo, base).
+
+Classe	                   CSS afetado
+rounded-t-*	         border-top-left-radius + border-top-right-radius
+rounded-r-*	         border-top-right-radius + border-bottom-right-radius
+rounded-b-*	         border-bottom-left-radius + border-bottom-right-radius
+rounded-l-*	         border-top-left-radius + border-bottom-left-radius
+
+👉 Exemplo:
+. rounded-t-lg → só os cantos superiores ficam arredondados.
+. rounded-r-full → bordas da direita totalmente arredondadas.
+
+
+
+3. Cantos específicos:
+Aplica em um único canto.
+
+Classe:	        CSS afetado:
+rounded-tl-*	border-top-left-radius
+rounded-tr-*	border-top-right-radius
+rounded-br-*	border-bottom-right-radius
+rounded-bl-*	border-bottom-left-radius
+
+👉 Exemplo:
+. rounded-tr-2xl → apenas o canto superior direito fica arredondado.
+
+
+
+4. Direções lógicas (para suporte RTL)
+Essas são versões mais modernas, úteis em idiomas que escrevem da direita para esquerda (RTL).
+
+Classe:         	CSS afetado:
+rounded-s-*	        canto start (início, depende da direção do texto)
+rounded-e-*	        canto end (fim)
+rounded-ss-*	    canto superior start
+rounded-se-*	    canto superior end
+rounded-es-*	    canto inferior start
+rounded-ee-*	    canto inferior end
+
+👉 Exemplo:
+
+. Em português/inglês (LTR):
+  . rounded-s-lg = arredonda lado esquerdo.
+  . rounded-e-lg = arredonda lado direito.
+. Em árabe (RTL):
+  . rounded-s-lg = arredonda lado direito.
+  . rounded-e-lg = arredonda lado esquerdo.
+
+
+
+5. Valores personalizados:
+
+Você também pode passar valores manuais:
+
+Classe:	                    CSS gerado:
+rounded-[10px]	            border-radius: 10px;
+rounded-[50%]	            border-radius: 50%;
+rounded-[var(--my-var)]	    border-radius: var(--my-var);
+
+⚡ Resumindo
+. rounded-* → todos os cantos.
+. rounded-t/r/b/l-* → metade do elemento.
+. rounded-tl/tr/br/bl-* → um canto específico.
+. rounded-s/e-* → bordas dependentes da direção do texto (LTR/RTL).
+. rounded-[valor] → valores personalizados.
+. rounded-full → círculo ou pílula.
+
+
+
+
+
+🔹 Border Width no Tailwind (border-*)
+
+O Tailwind fornece utilitários para controlar a largura da borda de um elemento.
+Você pode aplicar em todos os lados, em um lado específico, ou até em direções lógicas (start/end).
+o seu prefixo tambem é border-
+
+1. Todos os lados:
+Aplica a mesma espessura de borda em todos os lados do elemento.
+
+Classe	                          CSS gerado	           Valor padrão
+border	                          border-width: 1px;	   1px
+border-0	                      border-width: 0;	       0
+border-2	                      border-width: 2px;	   2px
+border-4	                      border-width: 4px;	   4px
+border-8	                      border-width: 8px;	   8px
+border-[5px]	                  border-width: 5px;	   valor custom
+border-[0.5rem]	                  border-width: 0.5rem;	   valor custom
+
+👉 Exemplo:
+
+<div class="border-4 border-red-500">Caixa</div>
+Caixa com borda de 4px vermelha em todos os lados.
+
+
+
+2. Eixo horizontal e vertical:
+Aplica a largura da borda apenas no x (esquerda/direita) ou y (topo/baixo).
+
+Classe	         CSS gerado
+border-x	     border-inline-width: 1px;
+border-x-4	     border-inline-width: 4px;
+border-y	     border-block-width: 1px;
+border-y-2	     border-block-width: 2px;
+
+👉 Exemplo:
+<div class="border-y-4 border-blue-500">Texto</div>
+Borda apenas em cima e embaixo com 4px azul.
+
+
+
+3. Direções lógicas (suporte RTL):
+Classes que se adaptam conforme o idioma da página (LTR → esquerda/direita | RTL → direita/esquerda).
+
+Classe	            CSS gerado
+border-s	        border-inline-start-width: 1px;
+border-s-4	        border-inline-start-width: 4px;
+border-e	        border-inline-end-width: 1px;
+border-e-2	        border-inline-end-width: 2px;
+
+👉 Exemplo:
+. Em português (LTR): border-s-4 = borda à esquerda.
+. Em árabe (RTL): border-s-4 = borda à direita.
+
+
+
+4. Lados específicos:
+Aplica a largura da borda em apenas um lado fixo.
+
+Classe	             CSS gerado
+border-t	         border-top-width: 1px;
+border-t-4	         border-top-width: 4px;
+border-r	         border-right-width: 1px;
+border-r-2	         border-right-width: 2px;
+border-b	         border-bottom-width: 1px;
+border-b-8	         border-bottom-width: 8px;
+border-l	         border-left-width: 1px;
+border-l-4	         border-left-width: 4px;
+
+👉 Exemplo:
+
+<div class="border-b-8 border-green-500">Rodapé</div>
+Adiciona uma borda de 8px verde apenas embaixo.
+
+
+5. Valores personalizados:
+Você também pode usar valores manuais com colchetes:
+
+Classe:	                      CSS gerado:
+border-[3px]	              border-width: 3px;
+border-x-[10px]	              border-inline-width: 10px;
+border-t-[0.5rem]	          border-top-width: 0.5rem;
+border-s-[var(--my-var)]	  border-inline-start-width: var(--my-var);
+
+
+⚡ Resumindo
+. border-* → todos os lados.
+. border-x-* / border-y-* → aplica só nos eixos.
+. border-s-* / border-e-* → direções lógicas (LTR/RTL).
+. border-t/r/b/l-* → apenas em um lado específico.
+. border-[valor] → valores personalizados.
+
+
+
+
+
+
+
+
+🎨 Border Color no Tailwind:
+O Tailwind CSS fornece utilitários para controlar a cor da borda de um elemento.
+Essas classes são muito usadas para destacar caixas, botões, inputs e outros componentes visuais.
+
+📌 Estrutura básica da classe
+. Sempre começa com border- e é esse o seu prefixo.
+. O que vem depois define qual cor será aplicada.
+
+Exemplo:
+<div class="border border-red-500">Exemplo</div>
+
+➡ Vai aplicar uma borda com cor vermelha no tom 500.
+
+
+
+🔎 Classes principais:
+Classe	                        Descrição
+border-inherit	                Herda a cor da borda do elemento pai (inherit).
+border-current	                Usa a cor atual do texto (currentColor).
+border-transparent	            Deixa a borda transparente.
+border-black	                Define a cor da borda como preto (#000).
+border-white	                Define a cor da borda como branco (#fff).
+
+
+
+🎨 Escala de cores (50 → 950):
+O Tailwind fornece uma escala de cores que vai do tom mais claro (50) até o mais escuro (950).
+Essa escala existe para todas as cores principais (red, orange, blue, green, etc.).
+
+
+Exemplo com vermelho (red):
+Classe	                    Cor aplicada	  Descrição
+border-red-50	            tom bem claro	  quase branco
+border-red-500	            tom médio	      vermelho padrão
+border-red-950	            tom escuro	      vermelho quase preto
+
+Exemplo com laranja (orange):
+Classe           	Cor aplicada	Descrição
+border-orange-50	tom bem claro	quase bege
+border-orange-500	tom médio	    laranja padrão
+border-orange-950	tom escuro	    laranja profundo
+
+
+🔧 Uso prático:
+
+ Caixa com borda vermelha clara 
+<div class="border-2 border-red-50">Exemplo 1</div>
+
+ Caixa com borda vermelha padrão 
+<div class="border-2 border-red-500">Exemplo 2</div>
+
+ Caixa com borda vermelha escura 
+<div class="border-2 border-red-950">Exemplo 3</div>
+
+✅ Resumindo
+. border-<cor> → Define a cor da borda.
+. Escala vai de 50 (claro) a 950 (escuro).
+. Classes especiais: inherit, current, transparent, black, white.
+. Muito útil para inputs, caixas, botões e destaques visuais.
+
+
+
+
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/output.css">
+</head>
+<body class="bg-blue-500">
+    <div class="pt-1px ms-auto m-1px rounded-2xl">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere dolores 
+        natus sit sed officia repellat labore 
+        architecto ullam nulla cupiditate expedita esse ab pariatur provident 
+        blanditiis corrupti molestiae, veniam hic?
+    </div>
+</body>
+</html>
