@@ -1,0 +1,340 @@
+<!--
+
+nesta aula iremos focar em fontes e cores.
+
+na documentação do site iremos mexer bastante na parte de tipografia e cores nesta aula.
+
+
+utilizando propriedades de textos com tailwind:
+comecaremos com os font-sizes. com font size sempre começamos com seu prefixo que é text 
+e colocamos o tamanho que é - e o tamanho.
+
+essa sintaxe do prefixo começar com text- o valor vale pra maioria dos valores quando se trata de texto,
+text- e o prefixo ou classe que trabalha com texto.
+
+abaixo iremos ver alguns exemplos de propriedades usando tailwind que pegamos la na parte
+de documentação do site.
+
+
+. font size usando tailwind:
+exemplos:
+
+Class                                                      Estilos
+text-xs                                                font-size: var(--text-xs); /* 0.75rem (12px) */ 
+                                                      line-height: var(--text-xs--line-height); /* calc(1 / 0.75) */
+                   
+                                                      
+text-sm                                               font-size: var(--text-sm); /* 0.875rem (14px) */ 
+                                                      line-height: var(--text-sm--line-height); /* calc(1.25 / 0.875) */
+
+text-base                                             font-size: var(--text-base); /* 1rem (16px) */                                              
+                                                      line-height: var(--text-base--line-height); /* calc(1.5 / 1) */
+
+text-lg                                               font-size: var(--text-lg); /* 1.125rem (18px) */                                                
+                                                      line-height: var(--text-lg--line-height); /* calc(1.75 / 1.125) */
+
+text-xl                                               font-size: var(--text-xl); /* 1.25rem (20px) */                                                
+                                                      line-height: var(--text-xl--line-height); /* calc(1.75 / 1.25) */
+
+text-2xl                                              font-size: var(--text-2xl); /* 1.5rem (24px) */                                               
+                                                      line-height: var(--text-2xl--line-height); /* calc(2 / 1.5) */
+
+text-3xl                                              font-size: var(--text-3xl); /* 1.875rem (30px) */                                               
+                                                      line-height: var(--text-3xl--line-height); /* calc(2.25 / 1.875) */
+
+text-4xl                                              font-size: var(--text-4xl); /* 2.25rem (36px) */                                               
+                                                      line-height: var(--text-4xl--line-height); /* calc(2.5 / 2.25) */
+
+text-5xl                                              font-size: var(--text-5xl); /* 3rem (48px) */                                               
+                                                      line-height: var(--text-5xl--line-height); /* 1 */
+
+text-6xl                                              font-size: var(--text-6xl); /* 3.75rem (60px) */                                               
+                                                      line-height: var(--text-6xl--line-height); /* 1 */
+
+text-7xl                                              font-size: var(--text-7xl); /* 4.5rem (72px) */                                               
+                                                      line-height: var(--text-7xl--line-height); /* 1 */
+
+text-8xl                                              font-size: var(--text-8xl); /* 6rem (96px) */                                               
+                                                      line-height: var(--text-8xl--line-height); /* 1 */
+
+text-9xl                                              font-size: var(--text-9xl); /* 8rem (128px) */                                               
+                                                      line-height: var(--text-9xl--line-height); /* 1 */
+
+text-(length:<custom-property>)                       font-size: var(<custom-property>);                       
+  
+text-[<value>]                                        font-size: <value>;   
+  
+
+
+. font-weight usando tailwind:
+Utilitários para controlar o peso da fonte de um elemento.
+
+exemplos existentes:
+Class                               Styles
+font-thin                          font-weight: 100;
+
+font-extralight                    font-weight: 200;
+
+font-light                         font-weight: 300;
+
+font-normal                        font-weight: 400;
+
+font-medium                        font-weight: 500;
+
+font-semibold                      font-weight: 600;
+
+font-bold                          font-weight: 700;
+
+font-extrabold                     font-weight: 800;
+
+font-black                         font-weight: 900;
+
+font-(<custom-property>)           font-weight: var(<custom-property>);
+
+font-[<value>]                     font-weight: <value>;
+
+
+
+
+. text-align usando tailwind:
+Utilitários para controlar o alinhamento do texto.s
+Class                                Styles
+text-left                        text-align: left;
+text-center                      text-align: center;
+text-right                       text-align: right;
+text-justify                     text-align: justify;
+text-start                       text-align: start;
+text-end                         text-align: end;
+
+
+
+
+
+
+text color com tailwind:
+aqui eu primeiro passa seu frefixo que é text em seguida - o valor, pode ser tranparante, ou uma cor apenas,
+ou eu posso controlar o nivel dessa cor passando text- e a cor - o nivel da cor.
+o peso das cores vai normalmente de 100 a 900
+
+exemplos usando tailwind:
+Class                                      Styles
+text-inherit                          color: inherit;
+text-current                          color: currentColor;
+text-transparent                      color: transparent;
+text-black                            color: var(--color-black); /* #000 */
+text-white                            color: var(--color-white); /* #fff */
+text-white
+text-red-50
+
+text-red-100
+
+text-red-200
+
+text-red-300
+
+text-red-400
+
+text-red-500
+
+text-red-600
+
+text-red-700
+
+text-red-800
+
+text-red-900
+
+text-red-950
+
+text-orange-50
+
+text-orange-100
+
+text-orange-200
+
+text-orange-300
+
+text-orange-400
+
+text-orange-500
+
+text-orange-600
+
+text-orange-700
+
+text-orange-800
+
+text-orange-900
+
+text-orange-950
+
+text-amber-50
+
+text-amber-100
+
+text-amber-200
+
+text-amber-300
+
+text-amber-400
+
+text-amber-500
+
+text-amber-600
+
+text-amber-700
+
+text-amber-800
+
+text-amber-900
+
+text-amber-950
+
+text-yellow-50
+
+text-yellow-100
+
+text-yellow-200
+
+text-yellow-300
+
+text-yellow-400
+
+text-yellow-500
+
+text-yellow-600
+
+text-yellow-700
+
+text-yellow-800
+
+text-yellow-900
+
+text-yellow-950
+
+text-lime-50
+
+text-lime-100
+
+text-lime-200
+
+text-lime-300
+
+text-lime-400
+
+text-lime-500
+
+text-lime-600
+
+text-lime-700
+
+text-lime-800
+
+text-lime-900
+
+text-lime-950
+
+text-green-50
+
+text-green-100
+
+text-green-200
+
+text-green-300
+
+text-green-400
+
+text-green-500
+
+text-green-600
+
+text-green-700
+
+text-green-800
+
+text-green-900
+
+text-green-950
+
+text-emerald-50
+
+text-emerald-100
+
+text-emerald-200
+
+text-emerald-300
+
+text-emerald-400
+
+text-emerald-500
+
+text-emerald-600
+
+text-emerald-700
+
+text-emerald-800
+
+text-emerald-900
+
+text-emerald-950
+
+text-teal-50
+
+text-teal-100
+
+text-teal-200
+
+text-teal-300
+
+text-teal-400
+
+text-teal-500
+
+text-teal-600
+
+text-teal-700
+
+text-teal-800
+
+text-teal-900
+
+
+observação sobre cores no tailwind:
+essas cores foram só alguns exemplos de como podemos fazer, é aconselhavel eu ir nos documentos do
+site e procrar por cores que o site disponibiliza diversos tipos de cores e seus niveis de cores
+com visuais graficos tudo de forma gratuita. alem disso, na seção de cores, as cores que tiverem lá,
+vale lembrar que eu posso usar pra qualquer tipo de class (ou prefixo), pode ser pra texto, sombras,
+background, as cores de la servem pra tudo.
+
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/output.css">
+
+</head>
+<body class="bg-grey-100">
+    <h1 class="text-sm">
+    Hello world!
+    </h1>
+    <h1 class="text-base">
+    Hello world!
+    </h1>
+    <h1 class="text-lg">
+    Hello world!
+    </h1>
+    <h1 class="text-xl">
+    Hello world!
+    </h1>
+    <h1 class="text-2x1">
+    Hello world!
+    </h1>
+    
+</body>
+</html>

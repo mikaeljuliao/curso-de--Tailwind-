@@ -141,9 +141,68 @@ site oficial: https://nodejs.org/pt
 site oficial: https://tailwindcss.com/
 3- ja no site, é aconselhavel sempre seguir a documentação de instalação, pra isso, iremos em documentos ou docs e ir na parte de instalação, 
 e la terá varias formas de instalção, vite e etc, oque iremos usar instalar agora é o Tailwind CLI, que é o cliente de Tailwind.
-4- o comando do Tailwind CLI do video é: npx tailwindcss -o tailwind.css 
-dessa forma ele irar exportar todas as classes do tailwind e colocar nesse arquivo css
+4-Comandos de instalçao do documento do site:
+  1. primeiro Instalar Tailwind CSS Instalar tailwindcsse @tailwindcss/clivia npm.
+  . comando: npm install tailwindcss @tailwindcss/cli
+  2. o segundo passo é Importar Tailwind em seu CSS.
+  Adicione a @import "tailwindcss";importação ao seu arquivo CSS principal.
+  . comando: @import "tailwindcss";
+  3. terceiro passo é Inicie o processo de construção do Tailwind CLI.
+  Execute a ferramenta CLI para escanear seus arquivos de origem em busca de classes e construir seu CSS.
+  comando: npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
+  explicação do comando:
+  Esse comando executa a CLI do Tailwind e é composto por três partes principais:
+ 
+  1.  -i ./src/input.css (input / arquivo de entrada)
+    . -i significa input (entrada).
+    . Define qual arquivo CSS o Tailwind deve usar como ponto de partida.
+    . Aqui você também informa o caminho da pasta e do arquivo:
+      . ./src/input.css → significa que existe uma pasta chamada src e dentro dela um arquivo input.css.
+      . Se essa pasta/arquivo não existir, o comando dá erro.
+    . Nesse input.css você coloca:
+    @tailwind base; 
+    @tailwind components;
+    @tailwind utilities;
 
+
+  2. -o ./src/output.css (output / arquivo de saída)
+    . -o significa output (saída).
+    . Define onde o Tailwind deve salvar o CSS processado.
+    . Assim como no input, você precisa passar o caminho da pasta e do arquivo:
+       . ./src/output.css → significa que o arquivo final será criado dentro da pasta src 
+       com o nome output.css.
+    . Esse arquivo é o que você vai importar no seu HTML:
+    <link href="./src/output.css" rel="stylesheet">
+
+
+   3. --watch (monitoramento)
+   . Mantém o comando ativo em segundo plano.
+   . O Tailwind monitora os arquivos do projeto (HTML, JS, etc).
+   . Sempre que você salvar uma mudança, o output.css será recompilado automaticamente, 
+   sem precisar rodar o comando de novo.
+
+  👉 Resumindo:
+  O comando lê o arquivo de entrada (input.css) no caminho que você informar, gera o arquivo de 
+  saída (output.css) no caminho escolhido, e com o --watch ele continua atualizando automaticamente 
+  sempre que você fizer alterações no projeto.
+
+  4. o quarto e utimo passo, Comece a usar o Tailwind em seu HTML
+  Adicione seu arquivo CSS compilado ao <head>e comece a usar as classes utilitárias 
+  do Tailwind para estilizar seu conteúdo. ou seja, adiciono meu arquivo output no head
+  exemplo:
+  <!doctype html>
+  <html>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  </head>
+  <body>
+  <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+  </body>
+  </html> 
 
 
 
@@ -157,3 +216,33 @@ dessa forma ele irar exportar todas as classes do tailwind e colocar nesse arqui
 
 
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/output.css">
+
+</head>
+<body class="bg-grey-100">
+    <h1 class="text-sm text-red-500">
+    Hello world!
+    </h1>
+    <h1 class="text-base text-yellow-800">
+    Hello world!
+    </h1>
+    <h1 class="text-lg text-green-200">
+    Hello world!
+    </h1>
+    <h1 class="text-xl text-green-600">
+    Hello world!
+    </h1>
+    <h1 class="text-2x1 text-blue-900">
+    Hello world!
+    </h1>
+    
+    <p class="text-center text-grey-500 font-weight-700"> texto</p>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!--
+nessa aula iremos aprender sobre espaçamento e irems abordar sobre padding e margin.
+
+
+📌 Tabela de espaçamento do Tailwind
+Classe (Tailwind)    Valor em rem	Valor em px
+0	                    0rem	     0px
+0.5	                    0.125rem	 2px
+1                    	0.25rem	     4px
+1.5                  	0.375rem	 6px
+2	                    0.5rem	     8px
+2.5	                    0.625rem	 10px
+3	                    0.75rem	     12px
+3.5                  	0.875rem	 14px
+4	                    1rem	     16px
+5	                    1.25rem	     20px
+6                   	1.5rem	     24px
+7	                    1.75rem	     28px
+8	                    2rem	     32px
+9	                    2.25rem	     36px
+10	                    2.5rem	     40px
+11	                    2.75rem	     44px
+12	                    3rem	     48px
+14	                    3.5rem	     56px
+16	                    4rem	     64px
+20	                    5rem	     80px
+24	                    6rem	     96px
+28	                    7rem	     112px
+32	                    8rem	     128px
+36	                    9rem	     144px
+40	                    10rem	     160px
+44	                    11rem	     176px
+48	                    12rem	     192px
+52	                    13rem	     208px
+56	                    14rem	     224px
+60	                    15rem	     240px
+64	                    16rem	     256px
+72	                    18rem	     288px
+80	                    20rem	     320px
+96	                    24rem	     384px
+
+⚡ Essa é a escala padrão do Tailwind até o 96 (que é o último valor predefinido).
+
+
+
+
+
+valor do espaçamento:
+algo importante de destacar é que esses valores em tailwind vale pra qualquer tipo de espaçamento, 
+como pading, margin, border e etc.
+
+
+
+
+
+espaçamento com pading em tailwind:
+o seu prefixo é o p: e quando queremos apontar pra alguns lados,
+ou outro valor alem do pading passamos junto com o p, sem - igual no css.
+
+exemplos de padding com tailwind:
+Class                         Styles
+p-<number>                    padding: calc(var(--spacing) * <number>);
+p-px                          padding: 1px;
+p-(<custom-property>)         padding: var(<custom-property>);
+p-[<value>]                   padding: <value>;
+px-<number>                   padding-inline: calc(var(--spacing) * <number>);
+px-px                         padding-inline: 1px;
+px-(<custom-property>)        padding-inline: var(<custom-property>);
+px-[<value>]                  padding-inline: <value>;
+py-<number>                   padding-block: calc(var(--spacing) * <number>);
+py-px                         padding-block: 1px;
+py-(<custom-property>)        padding-block: var(<custom-property>);
+py-[<value>]                  padding-block: <value>;
+ps-<number>                   padding-inline-start: calc(var(--spacing) * <number>);
+ps-px                         padding-inline-start: 1px;
+ps-(<custom-property>)        padding-inline-start: var(<custom-property>);
+ps-[<value>]                  padding-inline-start: <value>;
+pe-<number>                   padding-inline-end: calc(var(--spacing) * <number>);
+pe-px                         padding-inline-end: 1px;
+pe-(<custom-property>)        padding-inline-end: var(<custom-property>);
+pe-[<value>]                  padding-inline-end: <value>;
+pt-<number>                   padding-top: calc(var(--spacing) * <number>);
+pt-px                         padding-top: 1px;
+pt-(<custom-property>)        padding-top: var(<custom-property>);
+pt-[<value>]                  padding-top: <value>;
+pr-<number>                   padding-right: calc(var(--spacing) * <number>);
+pr-px                         padding-right: 1px;
+pr-(<custom-property>)        padding-right: var(<custom-property>);
+pr-[<value>]                  padding-right: <value>;
+pb-<number>                   padding-bottom: calc(var(--spacing) * <number>);
+pb-px                         padding-bottom: 1px;
+pb-(<custom-property>)        padding-bottom: var(<custom-property>);
+pb-[<value>]                  padding-bottom: <value>;
+pl-<number>                   padding-left: calc(var(--spacing) * <number>);
+pl-px                         padding-left: 1px;
+pl-(<custom-property>)        padding-left: var(<custom-property>);
+pl-[<value>]                  padding-left: <value>;
+
+
+
+    
+
+
+
+
+espaçamento com margin em tailwind:
+o seu prefixo é o m: e quando queremos apontar pra alguns lados,
+ou outro valor alem do pading passamos junto com o m, sem - igual no css.
+
+exemplos de margin com tailwind:
+Class                            Styles
+m-<number>                    margin: calc(var(--spacing) * <number>);
+-m-<number>                   margin: calc(var(--spacing) * -<number>);
+m-auto                        margin: auto;
+m-px                          margin: 1px;
+-m-px                         margin: -1px;
+m-(<custom-property>)         margin: var(<custom-property>);
+m-[<value>]                   margin: <value>;
+mx-<number>                   margin-inline: calc(var(--spacing) * <number>);
+-mx-<number>                  margin-inline: calc(var(--spacing) * -<number>);
+mx-auto                       margin-inline: auto;
+mx-px                         margin-inline: 1px;
+-mx-px                        margin-inline: -1px;
+mx-(<custom-property>)        margin-inline: var(<custom-property>);
+mx-[<value>]                  margin-inline: <value>;
+my-<number>                   margin-block: calc(var(--spacing) * <number>);
+-my-<number>                  margin-block: calc(var(--spacing) * -<number>);
+my-auto                       margin-block: auto;
+my-px                         margin-block: 1px;
+-my-px                        margin-block: -1px;
+my-(<custom-property>)        margin-block: var(<custom-property>);
+my-[<value>]                  margin-block: <value>;
+ms-<number>                   margin-inline-start: calc(var(--spacing) * <number>);
+-ms-<number>                  margin-inline-start: calc(var(--spacing) * -<number>);
+ms-auto                       margin-inline-start: auto;
+ms-px                         margin-inline-start: 1px;
+-ms-px                        margin-inline-start: -1px;
+ms-(<custom-property>)        margin-inline-start: var(<custom-property>);
+ms-[<value>]                  margin-inline-start: <value>;
+me-<number>                   margin-inline-end: calc(var(--spacing) * <number>);
+-me-<number>                  margin-inline-end: calc(var(--spacing) * -<number>);
+me-auto                       margin-inline-end: auto;
+me-px                         margin-inline-end: 1px;
+-me-px                        margin-inline-end: -1px;
+me-(<custom-property>)        margin-inline-end: var(<custom-property>);
+me-[<value>]                  margin-inline-end: <value>;
+mt-<number>                   margin-top: calc(var(--spacing) * <number>);
+-mt-<number>                  margin-top: calc(var(--spacing) * -<number>);
+mt-auto                       margin-top: auto;
+mt-px                         margin-top: 1px;
+-mt-px                        margin-top: -1px;
+mt-(<custom-property>)        margin-top: var(<custom-property>);
+mt-[<value>]                  margin-top: <value>;
+mr-<number>                   margin-right: calc(var(--spacing) * <number>);
+-mr-<number>                  margin-right: calc(var(--spacing) * -<number>);
+mr-auto                       margin-right: auto;
+mr-px                         margin-right: 1px;
+-mr-px                        margin-right: -1px;
+mr-(<custom-property>)        margin-right: var(<custom-property>);
+mr-[<value>]                  margin-right: <value>;
+mb-<number>                   margin-bottom: calc(var(--spacing) * <number>);
+-mb-<number>                  margin-bottom: calc(var(--spacing) * -<number>);
+mb-auto                       margin-bottom: auto;
+mb-px                         margin-bottom: 1px;
+-mb-px                        margin-bottom: -1px;
+mb-(<custom-property>)        margin-bottom: var(<custom-property>);
+mb-[<value>]                  margin-bottom: <value>;
+ml-<number>                   margin-left: calc(var(--spacing) * <number>);
+-ml-<number>                  margin-left: calc(var(--spacing) * -<number>);
+ml-auto                       margin-left: auto;
+ml-px                         margin-left: 1px;
+-ml-px                        margin-left: -1px;
+ml-(<custom-property>)        margin-left: var(<custom-property>);
+ml-[<value>]                  margin-left: <value>;
+
+
+
+
+
+
+
+
+🔹 O que é o space-x e space-y?
+. space-x-* → adiciona espaçamento horizontal entre os elementos filhos (deixa “respiro” entre eles na horizontal).
+. space-y-* → adiciona espaçamento vertical entre os elementos filhos (respiro na vertical).
+
+⚠️ Importante:
+Essas classes não colocam margem no primeiro ou último elemento, apenas nos elementos do meio (:not(:last-child)).
+
+
+
+🔹 Como funciona por trás dos panos?
+
+Exemplo:
+
+<div class="flex space-x-4">
+  <div class="bg-red-500">1</div>
+  <div class="bg-blue-500">2</div>
+  <div class="bg-green-500">3</div>
+</div>
+
+
+Resultado → cada <div> dentro do container terá um espaço de 1rem (16px) entre elas, mas o último não recebe margem.
+
+O Tailwind faz isso aplicando margens automáticas com um seletor:
+
+& > :not(:last-child) {
+  margin-right: 1rem;
+}
+
+
+No caso do space-x, ele usa margin-inline-start e margin-inline-end (para suportar idiomas RTL).
+No space-y, usa margin-block-start e margin-block-end (para suportar layouts verticais).
+
+
+
+🔹 Entendendo as variações:
+. space-x-4 / space-y-4 → aplica espaçamento fixo com base na escala do Tailwind (4 = 1rem = 16px).
+. -space-x-4 / -space-y-4 → aplica espaçamento negativo (útil quando você quer sobrepor elementos).
+. space-x-px / space-y-px → espaçamento de 1px entre os filhos.
+. space-x-[20px] / space-y-[50%] → você pode passar valores arbitrários com colchetes.
+. space-x-reverse / space-y-reverse → inverte a direção do espaçamento (usado em casos de layout reverso).
+
+
+🔹 Em resumo:
+. space-x-* → controla a distância horizontal entre elementos irmãos.
+. space-y-* → controla a distância vertical entre elementos irmãos.
+. Ele funciona aplicando margens em todos os elementos menos no último.
+. Você pode usar valores da escala (4, 6, 8), valores arbitrários ([10px]), negativos ou até px.
+
+👉 Exemplo prático para fixar:
+
+<div class="space-y-4">
+  <div class="bg-red-500 h-10">Item 1</div>
+  <div class="bg-blue-500 h-10">Item 2</div>
+  <div class="bg-green-500 h-10">Item 3</div>
+</div>
+
+
+Resultado → cada <div> terá 16px (1rem) de distância vertical entre si.    
+-->
