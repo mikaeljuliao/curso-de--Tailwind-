@@ -1,0 +1,61 @@
+<!--
+
+Responsividade no Tailwind CSS – Breakpoints:
+O Tailwind usa breakpoints móveis-primeiro (mobile-first).
+Isso significa que, por padrão, os estilos aplicam em todas as telas, e os prefixos responsivos servem para adicionar ou substituir estilos a partir de um tamanho mínimo de tela.
+
+
+Breakpoints padrão do Tailwind:
+. sm → 640px (pequenos dispositivos)
+. md → 768px (tablets)
+. lg → 1024px (notebooks pequenos)
+. xl → 1280px (monitores grandes)
+. 2xl → 1536px (telas bem grandes)
+
+👉 Cada prefixo significa: "aplicar este estilo quando a tela for maior ou igual a esse tamanho".
+
+
+
+Como usar os prefixos:
+Basta colocar o prefixo antes da classe.
+
+Exemplo 1 – Mudando cor conforme o tamanho
+<div class="bg-red-500 sm:bg-blue-500 md:bg-green-500 lg:bg-yellow-500 xl:bg-purple-500">
+  Responsivo com breakpoints
+</div>
+
+
+Default (mobile) → vermelho:
+. ≥ 640px (sm) → azul
+. ≥ 768px (md) → verde
+. ≥ 1024px (lg) → amarelo
+. ≥ 1280px (xl) → roxo
+
+
+Exemplo 2 – Layout responsivo com grid:
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div class="bg-gray-300">01</div>
+  <div class="bg-gray-300">02</div>
+  <div class="bg-gray-300">03</div>
+  <div class="bg-gray-300">04</div>
+</div>
+
+
+Mobile (default) → 1 coluna:
+. ≥ sm (640px) → 2 colunas
+. ≥ lg (1024px) → 4 colunas
+
+Exemplo 3 – Texto responsivo:
+<p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+  Texto com tamanho adaptável
+</p>
+
+👉 O texto cresce conforme a largura da tela aumenta.
+
+
+Dica importante:
+. Sempre comece do mobile para cima (mobile-first).
+. Pode combinar vários breakpoints na mesma classe.
+. Dá pra usar responsividade em qualquer utilitário do Tailwind (cor, tamanho, margin, padding, grid, flex, etc).
+
+-->
