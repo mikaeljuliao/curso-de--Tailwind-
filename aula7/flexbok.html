@@ -486,4 +486,145 @@ Explicação Simples:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+Justify-content (alinhamento no eixo principal):
+O justify-content controla como os itens dentro do container flex/grid são distribuídos ao longo do eixo principal.
+
+➡️ Eixo principal = depende do flex-direction:
+. row ou row-reverse: eixo principal é horizontal.
+. col ou col-reverse: eixo principal é vertical.
+
+Ou seja, o justify-content sempre vai organizar os itens na direção em que eles estão sendo empilhados.
+
+
+Classes e usos no Tailwind:
+
+. justify-start → justify-content: flex-start;
+Os itens ficam encostados no início do eixo principal.
+🔹 Exemplo: em flex-row, ficam à esquerda.
+
+. justify-end → justify-content: flex-end;
+Os itens vão para o final do eixo principal.
+🔹 Exemplo: em flex-row, ficam à direita.
+
+. justify-center → justify-content: center;
+Todos os itens ficam centralizados no eixo principal.
+
+. justify-between → justify-content: space-between;
+O primeiro item encosta no início e o último no final, os do meio ficam distribuídos igualmente.
+
+. justify-around → justify-content: space-around;
+Espaços iguais ao redor de cada item, mas as bordas externas ficam com metade do espaço interno.
+
+. justify-evenly → justify-content: space-evenly;
+Espaços iguais entre todos os itens e também nas bordas externas.
+
+. justify-stretch → justify-content: stretch;
+Itens se esticam para ocupar o espaço disponível.
+
+. justify-baseline → justify-content: baseline;
+Alinha os itens na linha de base do texto (raro em justify, mais comum em align-items).
+
+. justify-normal → justify-content: normal;
+Volta ao comportamento padrão do navegador.
+
+. justify-end-safe e justify-center-safe
+Versões “seguras” que evitam que o navegador quebre o layout em contextos específicos (usado em ambientes mais modernos, mas pouco comum no dia a dia).
+
+
+Resumo visual (em flex-row):
+
+🔹 justify-start → [01][02][03]⠀⠀⠀⠀⠀⠀⠀⠀
+🔹 justify-end → ⠀⠀⠀⠀⠀⠀⠀⠀[01][02][03]
+🔹 justify-center → ⠀⠀⠀[01][02][03]⠀⠀⠀
+🔹 justify-between → [01]⠀⠀[02]⠀⠀[03]
+🔹 justify-around → ⠀[01]⠀⠀[02]⠀⠀[03]⠀
+🔹 justify-evenly → [01]⠀⠀[02]⠀⠀[03]
+
+
+
+
+
+
+
+
+
+
+
+Align-items (alinhamento no eixo cruzado)
+O align-items controla como os itens dentro de um container flex/grid são posicionados ao longo do eixo cruzado.
+
+➡️ Eixo cruzado = sempre o perpendicular ao eixo principal:
+
+. Se flex-direction: row, eixo principal = horizontal → eixo cruzado = vertical.
+. Se flex-direction: column, eixo principal = vertical → eixo cruzado = horizontal.
+Ou seja, o align-items organiza os itens na direção contrária da que eles estão empilhados.
+
+
+
+Classes e usos no Tailwind:
+
+. items-start → align-items: flex-start;
+Os itens ficam no início do eixo cruzado.
+🔹 Em flex-row: ficam no topo.
+
+. items-end → align-items: flex-end;
+Os itens ficam no final do eixo cruzado.
+🔹 Em flex-row: ficam embaixo.
+
+. items-center → align-items: center;
+Centraliza os itens no eixo cruzado.
+🔹 Em flex-row: ficam centralizados verticalmente.
+
+. items-baseline → align-items: baseline;
+Alinha os itens pela linha de base do texto.
+
+. items-baseline-last → align-items: last baseline;
+Similar ao anterior, mas usa a última linha de base disponível como referência.
+
+. items-stretch → align-items: stretch;
+Os itens são esticados para preencher o eixo cruzado (se não tiver altura/largura fixa).
+
+. items-end-safe e items-center-safe
+Versões “seguras” que evitam que o navegador quebre o layout em contextos específicos (como em escrita vertical ou RTL).
+
+
+
+
+Resumo visual (em flex-row):
+
+🔹 items-start →
+
+01   02   03   (todos alinhados no topo)
+
+🔹 items-end →
+
+   01   02   03   (todos alinhados embaixo)
+
+🔹 items-center →
+
+   01   02   03   (todos centralizados verticalmente)
+
+🔹 items-baseline →
+
+01 texto
+02    texto maior
+03 texto
+
+🔹 items-stretch →
+
+[01] [02] [03]  (todos esticados no eixo cruzado)
+ 
+
 -->
