@@ -1,0 +1,792 @@
+<!---
+
+
+📌 Aula de Grid no Tailwind CSS
+No Tailwind, as classes de Grid começam sempre com o prefixo grid-.
+👉 Mas, antes de qualquer configuração, é obrigatório declarar o container como grid.
+
+Exemplo:
+
+<div class="grid grid-cols-3 gap-4">
+  <div class="bg-red-300">1</div>
+  <div class="bg-green-300">2</div>
+  <div class="bg-blue-300">3</div>
+</div>
+
+Nesse caso, o container foi definido como grid, e dentro dele aplicamos 3 colunas.
+
+
+
+
+🔹 Grid Template Columns (grid-cols-*):
+Essas classes controlam o número de colunas que o grid vai ter.
+
+1. Colunas por número:
+grid-cols-<number>
+
+
+Define a quantidade de colunas iguais dentro do grid.
+
+. grid-cols-2 → duas colunas, cada uma ocupando 1fr (ou seja, o mesmo espaço).
+. grid-cols-3 → três colunas iguais.
+. grid-cols-4 → quatro colunas, etc.
+
+📌 Exemplo:
+
+<div class="grid grid-cols-2 gap-2">
+  <div class="bg-purple-300">A</div>
+  <div class="bg-yellow-300">B</div>
+</div>
+
+Resultado → duas colunas lado a lado.
+
+
+
+2. Nenhuma coluna:
+grid-cols-none
+
+Remove a definição automática de colunas.
+Nesse caso, os filhos ficam soltos sem uma estrutura de colunas definida.
+
+
+
+3. Subgrid:
+grid-cols-subgrid
+
+Faz o grid herdar a definição de colunas de um grid pai.
+Muito útil quando você tem grids aninhados e quer manter a mesma proporção de colunas.
+
+
+
+4. Valor personalizado:
+grid-cols-[<value>]
+
+Permite definir valores manuais, como tamanhos fixos, percentuais ou minmax.
+
+📌 Exemplo:
+
+<div class="grid grid-cols-[200px,1fr,2fr] gap-2">
+  <div class="bg-red-300">200px</div>
+  <div class="bg-green-300">1fr</div>
+  <div class="bg-blue-300">2fr</div>
+</div>
+
+
+Aqui, a primeira coluna terá 200px, a segunda ocupará 1 fração e a terceira 2 frações.
+
+
+
+5. Variáveis personalizadas:
+grid-cols-(<custom-property>)
+
+Permite usar variáveis CSS no grid-template-columns.
+
+
+📌 Resumo:
+
+. grid-cols-N → N colunas iguais.
+. grid-cols-none → sem colunas.
+. grid-cols-subgrid → herda colunas do pai.
+. grid-cols-[...] → define manualmente.
+. grid-cols-(...) → usa variáveis CSS.
+
+
+
+
+
+
+
+
+
+
+
+
+📌 Grid – grid-column
+
+O prefixo grid-column é usado para controlar como os elementos são dimensionados e posicionados dentro das colunas de um grid layout.
+
+🔹 1. Controle de span (quantas colunas ocupa):
+
+. col-span-<number> → grid-column: span <number> / span <number>;
+. col-span-full → grid-column: 1 / -1; (ocupa todas as colunas do grid)
+. col-span-(<custom-property>) → usa variável CSS
+. col-span-[<value>] → valor customizado
+
+
+
+🔹 2. Definindo o início da coluna (col-start):
+
+. col-start-<number> → começa na coluna especificada
+. -col-start-<number> → usa cálculo negativo
+. col-start-auto → início automático
+. col-start-(<custom-property>) → via variável CSS
+. col-start-[<value>] → valor customizado
+
+
+
+🔹 3. Definindo o fim da coluna (col-end):
+
+. col-end-<number> → termina na coluna especificada
+. -col-end-<number> → fim negativo (calculado)
+. col-end-auto → fim automático
+. col-end-(<custom-property>) → via variável CSS
+. col-end-[<value>] → valor customizado
+
+
+
+
+🔹 4. Definição direta de coluna:
+
+. col-auto → posicionamento automático
+. col-<number> → define diretamente início/fim com número
+-col-<number> → valores negativos calculados
+. col-(<custom-property>) → via variável CSS
+. col-[<value>] → valor customizado
+
+🔹 Exemplo prático
+<div class="grid grid-cols-4 gap-4">
+  Ocupa 2 colunas 
+  <div class="col-span-2 bg-blue-300">Span 2</div>
+
+   Começa na coluna 2 e termina na 4 
+  <div class="col-start-2 col-end-4 bg-green-300">Start 2 / End 4</div>
+
+   Ocupa todas as colunas 
+  <div class="col-span-full bg-red-300">Full Column</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+diferença do grid-template-columns pro rid-column:
+
+
+🔹 grid-template-columns
+. Define a estrutura da grade (quantas colunas o grid vai ter e qual será o tamanho delas).
+. Ele é aplicado no container (display: grid).
+. Pensa como o "mapa" das colunas.
+
+👉 Exemplo:
+
+<div class="grid grid-cols-3 gap-4">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. grid-cols-3 cria 3 colunas iguais.
+. Aqui, o grid está dizendo "vou ter 3 colunas, cada uma com 1fr".
+
+
+
+🔹 grid-column:
+. Define como cada item vai ocupar as colunas que o grid-template-columns criou.
+. Ele é aplicado nos filhos do grid (nos elementos dentro do container).
+. Pensa como "em qual coluna cada item vai ficar e quantas ele vai ocupar".
+
+👉 Exemplo:
+
+<div class="grid grid-cols-4 gap-4">
+  <div class="col-span-2 bg-blue-300">Ocupa 2 colunas</div>
+  <div class="col-start-3 col-end-5 bg-green-300">Vai da coluna 3 até a 4</div>
+</div>
+
+. Aqui o grid-cols-4 cria 4 colunas iguais.
+. O col-span-2 faz o item ocupar 2 colunas.
+. O col-start-3 col-end-5 faz o item ocupar da coluna 3 até a última (4).
+
+
+✅ Diferença resumida:
+. grid-template-columns → define a estrutura das colunas no container (quantas e o tamanho delas).
+. grid-column → define como cada item ocupa as colunas dentro dessa estrutura.
+
+
+
+
+
+
+
+
+
+
+
+
+📌 Grid no Tailwind CSS – Linhas (grid-template-rows)
+Assim como temos grid-cols-* para definir quantidade de colunas, também temos grid-rows-* para definir quantidade de linhas em um layout de grid.
+O prefixo usado é grid-rows-*.
+
+Antes de usar essas classes, o container precisa estar definido como grid:
+
+<div class="grid ...">
+   filhos do grid 
+</div>
+
+
+1. Definindo número de linhas:
+grid-rows-<number> → grid-template-rows: repeat(<number>, minmax(0, 1fr));
+
+. O <number> é a quantidade de linhas que você quer no grid.
+. Cada linha recebe 1fr (fração do espaço disponível).
+
+Exemplos:
+<div class="grid grid-rows-2 gap-4">
+  <div class="bg-red-300">Linha 1</div>
+  <div class="bg-blue-300">Linha 2</div>
+</div>
+
+
+➡️ Aqui teremos 2 linhas iguais.
+
+<div class="grid grid-rows-3 gap-2">
+  <div class="bg-green-300">Linha 1</div>
+  <div class="bg-yellow-300">Linha 2</div>
+  <div class="bg-purple-300">Linha 3</div>
+</div>
+
+
+➡️ Aqui teremos 3 linhas iguais, cada uma ocupando 1fr.
+
+ 
+2. Sem linhas (remover grid rows):
+grid-rows-none → grid-template-rows: none;
+
+Usado quando você quer resetar a definição de linhas, deixando o grid sem configuração explícita de grid-template-rows.
+
+
+3. Subgrid (herdar do grid pai):
+grid-rows-subgrid → grid-template-rows: subgrid;
+
+. Permite que o grid herde a configuração de linhas do grid pai.
+. Muito útil quando você tem grids aninhados e quer manter a consistência.
+
+
+
+4. Valores personalizados:
+Você pode usar valores customizados para criar layouts mais flexíveis.
+
+Por valor direto:
+grid-rows-[<value>] → grid-template-rows: <value>;
+
+
+Exemplo:
+
+<div class="grid grid-rows-[200px_auto_100px] gap-4">
+  <div class="bg-pink-300">200px</div>
+  <div class="bg-orange-300">auto</div>
+  <div class="bg-teal-300">100px</div>
+</div>
+
+➡️ Cria 3 linhas: a primeira com 200px, a segunda ajusta ao conteúdo (auto) e a terceira fixa em 100px.
+
+Por variável CSS:
+grid-rows-(<custom-property>) → grid-template-rows: var(<custom-property>);
+
+
+Exemplo:
+
+<div class="grid grid-rows-[var(--layout-rows)]">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+👉 Resumindo
+. grid-rows-2 → cria 2 linhas iguais.
+. grid-rows-none → remove definição de linhas.
+. grid-rows-subgrid → herda do grid pai.
+. grid-rows-[200px_auto] → usa valores específicos.
+
+
+
+
+
+
+
+📌 Grid – grid-row
+
+O prefixo grid-row é usado para controlar como os elementos são dimensionados e posicionados dentro das linhas de um grid layout.
+
+🔹 1. Controle de span (quantas linhas ocupa):
+. row-span-<number> → grid-row: span <number> / span <number>;
+. row-span-full → grid-row: 1 / -1; (ocupa todas as linhas do grid)
+. row-span-(<custom-property>) → usa variável CSS
+. row-span-[<value>] → valor customizado
+
+
+
+🔹 2. Definindo o início da linha (row-start):
+. row-start-<number> → começa na linha especificada
+. -row-start-<number> → usa cálculo negativo
+. row-start-auto → início automático
+. row-start-(<custom-property>) → via variável CSS
+. row-start-[<value>] → valor customizado
+
+
+
+🔹 3. Definindo o fim da linha (row-end):
+. row-end-<number> → termina na linha especificada
+. -row-end-<number> → fim negativo (calculado)
+. row-end-auto → fim automático
+. row-end-(<custom-property>) → via variável CSS
+. row-end-[<value>] → valor customizado
+
+🔹 4. Definição direta de linha
+
+row-auto → posicionamento automático
+
+row-<number> → define diretamente início/fim com número
+
+-row-<number> → valores negativos calculados
+
+row-(<custom-property>) → via variável CSS
+
+row-[<value>] → valor customizado
+
+🔹 Exemplo prático
+<div class="grid grid-rows-4 gap-4">
+   Ocupa 2 linhas 
+  <div class="row-span-2 bg-blue-300">Span 2</div>
+
+   Começa na linha 2 e termina na 4 
+  <div class="row-start-2 row-end-4 bg-green-300">Start 2 / End 4</div>
+
+   Ocupa todas as linhas 
+  <div class="row-span-full bg-red-300">Full Row</div>
+</div>
+
+
+
+
+
+
+
+
+🟦 Grid Auto Flow (grid-auto-flow):
+
+O grid-auto-flow é usado para controlar como os itens dentro de um grid são posicionados automaticamente quando não usamos grid-row ou grid-column para definir a posição deles manualmente.
+
+📌 Importante:
+. Ele define a direção e a densidade do fluxo automático.
+. É aplicado no container que tem display: grid.
+
+
+🔹 Prefixo:
+Sempre começa com grid-flow-.
+
+
+🔹 Classes disponíveis:
+➝ grid-flow-row:
+  . Padrão: os itens são colocados linha por linha.
+CSS:
+grid-auto-flow: row;
+
+
+➝ grid-flow-col:
+  . Os itens são colocados coluna por coluna.
+CSS:
+grid-auto-flow: column;
+
+➝ grid-flow-dense:
+  . Ativa o modo denso, tentando preencher os "buracos" da grid automaticamente.
+CSS:
+grid-auto-flow: dense;
+
+➝ grid-flow-row-dense:
+  . Mistura: segue a ordem de linha por linha, mas usando o modo denso.
+CSS:
+grid-auto-flow: row dense;
+
+➝ grid-flow-col-dense:
+  . Mistura: segue a ordem de coluna por coluna, mas usando o modo denso.
+CSS:
+grid-auto-flow: column dense;
+
+🔹 Exemplos
+✔ Exemplo básico
+<div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2">
+  <div class="col-span-2 bg-blue-300">01</div>
+  <div class="col-span-2 bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+  <div class="bg-yellow-300">04</div>
+  <div class="bg-purple-300">05</div>
+</div>
+
+. Aqui, usamos grid-flow-row-dense, então os itens grandes (que ocupam mais colunas) podem deixar "buracos".
+. O modo denso tenta reorganizar para preencher esses espaços automaticamente.
+
+
+
+✔ Exemplo responsivo:
+<div class="grid grid-flow-col md:grid-flow-row gap-4">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. Em telas pequenas → os itens fluem em colunas.
+. A partir de md: (médio breakpoint) → fluem em linhas.
+
+
+👉 Resumindo:
+. grid-flow-row → linha por linha.
+. grid-flow-col → coluna por coluna.
+. dense → tenta preencher espaços vazios automaticamente.
+. Pode ser combinado (row-dense, col-dense).
+
+
+
+
+
+
+
+
+
+🟦 Grid Auto Flow (grid-auto-flow)
+O grid-auto-flow é usado para controlar como os itens dentro de um grid são posicionados automaticamente quando não usamos grid-row ou grid-column para definir a posição deles manualmente.
+
+
+📌 Importante:
+. Ele define a direção e a densidade do fluxo automático.
+. É aplicado no container que tem display: grid.
+
+
+
+🔹 Prefixo:
+Sempre começa com grid-flow-.
+
+
+
+🔹 Classes disponíveis
+➝ grid-flow-row
+  . Padrão: os itens são colocados linha por linha.
+CSS:
+grid-auto-flow: row;
+
+➝ grid-flow-col
+  . Os itens são colocados coluna por coluna.
+CSS:
+grid-auto-flow: column;
+
+➝ grid-flow-dense
+  . Ativa o modo denso, tentando preencher os "buracos" da grid automaticamente.
+CSS:
+grid-auto-flow: dense;
+
+➝ grid-flow-row-dense
+  . Mistura: segue a ordem de linha por linha, mas usando o modo denso.
+CSS:
+grid-auto-flow: row dense;
+
+➝ grid-flow-col-dense
+  . Mistura: segue a ordem de coluna por coluna, mas usando o modo denso.
+CSS:
+grid-auto-flow: column dense;
+
+🔹 Exemplos
+✔ Exemplo básico
+<div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2">
+  <div class="col-span-2 bg-blue-300">01</div>
+  <div class="col-span-2 bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+  <div class="bg-yellow-300">04</div>
+  <div class="bg-purple-300">05</div>
+</div>
+
+. Aqui, usamos grid-flow-row-dense, então os itens grandes (que ocupam mais colunas) podem deixar "buracos".
+. O modo denso tenta reorganizar para preencher esses espaços automaticamente.
+
+✔ Exemplo responsivo
+<div class="grid grid-flow-col md:grid-flow-row gap-4">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. Em telas pequenas → os itens fluem em colunas.
+. A partir de md: (médio breakpoint) → fluem em linhas.
+
+
+
+👉 Resumindo:
+. grid-flow-row → linha por linha.
+. grid-flow-col → coluna por coluna.
+. dense → tenta preencher espaços vazios automaticamente.
+. Pode ser combinado (row-dense, col-dense).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🟦 Grid Auto Columns (grid-auto-columns):
+O grid-auto-columns define o tamanho das colunas que são criadas automaticamente pelo navegador, quando você adiciona itens em um grid sem declarar colunas explícitas no grid-template-columns.
+
+
+📌 Em outras palavras:
+. Se você tem um grid que vai gerando colunas de forma implícita, o grid-auto-columns controla a largura padrão dessas colunas.
+. Ele é aplicado no container que tem display: grid.
+
+
+🔹 Prefixo:
+Todas as classes começam com auto-cols-.
+
+
+🔹 Classes disponíveis:
+
+. auto-cols-auto → largura automática, baseada no conteúdo.
+CSS:
+grid-auto-columns: auto;
+
+. auto-cols-min → cada coluna terá o tamanho do menor conteúdo possível.
+CSS:
+grid-auto-columns: min-content;
+
+. auto-cols-max → cada coluna terá o tamanho do maior conteúdo.
+CSS:
+grid-auto-columns: max-content;
+
+. auto-cols-fr → cada coluna criada terá tamanho flexível, ocupando o espaço disponível igualmente.
+CSS:
+grid-auto-columns: minmax(0, 1fr);
+
+. auto-cols-[<value>] → define um valor personalizado, como 200px, 50%, minmax(0,2fr) etc.
+CSS:
+grid-auto-columns: <value>;
+
+auto-cols-(<custom-property>) → usa uma variável CSS como valor.
+CSS:
+grid-auto-columns: var(--my-auto-cols);
+
+
+🔹 Exemplos
+✔ Exemplo básico
+<div class="grid grid-flow-col auto-cols-max gap-4">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">Conteúdo bem maior</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. Aqui usamos auto-cols-max, então a largura das colunas vai se adaptar ao maior conteúdo dentro de cada célula.
+
+
+✔ Usando valor customizado:
+<div class="grid grid-flow-col auto-cols-[200px] gap-2">
+  <div class="bg-purple-300">01</div>
+  <div class="bg-yellow-300">02</div>
+  <div class="bg-pink-300">03</div>
+</div>
+
+. Nesse caso, cada coluna criada automaticamente terá 200px de largura.
+
+
+✔ Usando variáveis CSS
+<div class="grid grid-flow-col auto-cols-(--my-col-size) gap-2" style="--my-col-size: 150px;">
+  <div class="bg-teal-300">01</div>
+  <div class="bg-orange-300">02</div>
+  <div class="bg-indigo-300">03</div>
+</div>
+
+. Aqui usamos auto-cols-(--my-col-size), e cada coluna criada terá 150px, definido pela variável CSS.
+
+
+✔ Exemplo responsivo
+<div class="grid grid-flow-col auto-cols-max md:auto-cols-min gap-4">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. Em telas pequenas → colunas ajustam pelo maior conteúdo (auto-cols-max).
+. A partir de md: → colunas ajustam pelo menor conteúdo (auto-cols-min).
+]
+
+👉 Resumindo:
+
+. auto-cols-auto → padrão automático.
+. auto-cols-min → menor conteúdo.
+. auto-cols-max → maior conteúdo.
+. auto-cols-fr → distribui igualmente o espaço.
+. auto-cols-[valor] → você define exatamente.
+. auto-cols-(variável) → usa variável CSS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+🟦 Grid Auto Rows (grid-auto-rows)
+
+O grid-auto-rows define a altura das linhas criadas automaticamente em um grid.
+. Isso acontece quando você adiciona mais itens ao grid do que as linhas declaradas em grid-template-rows.
+. Assim como nas colunas, o navegador cria linhas extras de forma implícita, e o grid-auto-rows define a altura padrão delas.
+
+
+🔹 Prefixo:
+. Todas as classes começam com auto-rows-.
+
+
+🔹 Classes disponíveis:
+
+. auto-rows-auto → altura automática, baseada no conteúdo.
+CSS:
+grid-auto-rows: auto;
+
+. auto-rows-min → cada linha terá a altura do menor conteúdo possível.
+CSS:
+grid-auto-rows: min-content;
+
+. auto-rows-max → cada linha terá a altura do maior conteúdo.
+CSS:
+grid-auto-rows: max-content;
+
+. auto-rows-fr → cada linha criada terá altura flexível, ocupando o espaço disponível igualmente.
+CSS:
+grid-auto-rows: minmax(0, 1fr);
+
+. auto-rows-[<value>] → define um valor personalizado, como 100px, 20%, minmax(0,2fr) etc.
+CSS:
+grid-auto-rows: <value>;
+
+. auto-rows-(<custom-property>) → usa uma variável CSS como valor.
+CSS:
+grid-auto-rows: var(--my-auto-rows);
+
+
+🔹 Exemplos
+✔ Exemplo básico
+<div class="grid grid-flow-row auto-rows-max gap-2">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">Conteúdo maior que define altura</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. Aqui usamos auto-rows-max, então a altura de cada linha vai se adaptar ao maior conteúdo.
+
+
+✔ Usando valor customizado
+<div class="grid grid-flow-row auto-rows-[120px] gap-2">
+  <div class="bg-purple-300">01</div>
+  <div class="bg-yellow-300">02</div>
+  <div class="bg-pink-300">03</div>
+</div>
+
+.Cada linha criada terá 120px de altura.
+
+
+✔ Usando variáveis CSS
+<div class="grid grid-flow-row auto-rows-(--my-row-size) gap-2" style="--my-row-size: 80px;">
+  <div class="bg-teal-300">01</div>
+  <div class="bg-orange-300">02</div>
+  <div class="bg-indigo-300">03</div>
+</div>
+
+. Aqui usamos auto-rows-(--my-row-size), e cada linha criada terá 80px, definido pela variável CSS.
+
+
+✔ Exemplo responsivo
+<div class="grid grid-flow-row auto-rows-max md:auto-rows-min gap-2">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-green-300">02</div>
+  <div class="bg-red-300">03</div>
+</div>
+
+. Em telas pequenas → linhas seguem o maior conteúdo (auto-rows-max).
+. A partir de md: → linhas seguem o menor conteúdo (auto-rows-min).
+
+
+
+👉 Resumindo:
+. auto-rows-auto → padrão automático.
+. auto-rows-min → menor conteúdo.
+. auto-rows-max → maior conteúdo.
+. auto-rows-fr → divide espaço disponível igualmente.
+. auto-rows-[valor] → você define.
+. auto-rows-(variável) → usa variável CSS.
+
+
+
+
+
+
+
+
+
+
+Gap no Tailwind CSS:
+O gap é usado para controlar o espaçamento entre itens dentro de grids e flexbox.
+Ele funciona como o “gutter” (aquela margem entre colunas e linhas).
+
+
+Classes principais:
+
+. gap-{n} → adiciona espaçamento em todas as direções (linhas e colunas).
+Ex.: gap-2, gap-4, gap-8
+. gap-x-{n} → controla só o espaçamento horizontal (colunas).
+Ex.: gap-x-4
+. gap-y-{n} → controla só o espaçamento vertical (linhas).
+Ex.: gap-y-6
+
+
+Valores personalizados:
+Além dos valores prontos do Tailwind, você pode usar:
+. Custom property → gap-(--minha-variavel)
+. Valor fixo → gap-[20px]
+
+Exemplos:
+1. Gap simples
+<div class="grid grid-cols-3 gap-4">
+  <div class="bg-blue-300">01</div>
+  <div class="bg-blue-300">02</div>
+  <div class="bg-blue-300">03</div>
+</div>
+
+👉 Aqui, o gap-4 aplica espaço entre todas as colunas e linhas.
+
+
+
+2. Gap horizontal e vertical separados:
+<div class="grid grid-cols-3 gap-x-8 gap-y-2">
+  <div class="bg-green-300">01</div>
+  <div class="bg-green-300">02</div>
+  <div class="bg-green-300">03</div>
+</div>
+
+👉 gap-x-8 deixa as colunas afastadas, e gap-y-2 controla só o espaço entre as linhas.
+
+
+3. Gap com valor personalizado:
+<div class="grid grid-cols-2 gap-[30px]">
+  <div class="bg-red-300">01</div>
+  <div class="bg-red-300">02</div>
+</div>
+
+👉 Aqui usamos gap-[30px] para criar um espaçamento fixo de 30px
+
+
+
+
+
+
+
+
+-->
