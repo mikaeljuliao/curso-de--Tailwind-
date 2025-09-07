@@ -1,0 +1,152 @@
+<!--
+
+
+
+Aula: Estados no Tailwind CSS (hover, focus, active e mais
+No Tailwind, qualquer utilitário pode ser aplicado condicionalmente adicionando um prefixo (variant) antes da classe.
+Isso permite mudar estilos conforme o estado do elemento ou do contexto (ex: hover, foco, dark mode, etc).
+
+
+1. Estados mais comuns (interativos):
+Hover, Focus e Active
+<button class="bg-violet-500 hover:bg-violet-600 focus:outline-2 focus:outline-violet-500 active:bg-violet-700 px-4 py-2 text-white rounded">
+  Save changes
+</button>
+
+. hover: aplica no hover do mouse.
+. focus: aplica quando o elemento está em foco (ex: input clicado).
+. active: aplica quando o elemento está sendo pressionado.
+
+👉 Outros úteis: focus-visible, focus-within, visited.
+
+
+
+2. Estados estruturais (posição):
+Primeiro e último filho
+<ul>
+  <li class="first:pt-0 last:pb-0 py-4">Item 1</li>
+  <li class="py-4">Item 2</li>
+  <li class="py-4">Item 3</li>
+</ul>
+
+
+Ímpares e pares (zebra em tabelas)
+<table class="w-full">
+  <tbody>
+    <tr class="odd:bg-white even:bg-gray-50">
+      <td>Jane Cooper</td>
+      <td>jane@example.com</td>
+    </tr>
+    <tr class="odd:bg-white even:bg-gray-50">
+      <td>Cody Fisher</td>
+      <td>cody@example.com</td>
+    </tr>
+  </tbody>
+</table>
+
+
+👉 Também existem: only:, empty:, nth-*.
+
+3. Estados de formulários
+
+. disabled: → quando o input está desativado
+. required: → obrigatório
+. invalid: → quando a validação falha
+. checked: → checkbox/radio marcado
+. read-only:, indeterminate:, etc
+
+<input 
+  type="email" 
+  class="border p-2 invalid:border-pink-500 focus:border-sky-500 disabled:bg-gray-100"
+/>
+
+
+
+4. Estados baseados no pai (group):
+Se quiser mudar o estilo de filhos quando o pai estiver em certo estado, use a classe group.
+
+<a href="#" class="group block p-4 bg-gray-200 hover:bg-sky-500 rounded">
+  <h3 class="text-gray-900 group-hover:text-white">Novo projeto</h3>
+  <p class="text-gray-500 group-hover:text-white">Crie um projeto do zero.</p>
+</a>
+
+👉 Prefixos comuns: group-hover:, group-focus:, group-active:.
+
+
+Também é possível nomear grupos:
+<div class="group/item">
+  <a href="#" class="group-hover/item:text-red-500">Link</a>
+</div>
+
+
+
+5. Estados baseados no irmão (peer):
+
+Com peer, você pode mudar estilos de elementos baseados no estado de um input irmão.
+
+<label>
+  <input type="email" class="peer border" required />
+  <p class="invisible peer-invalid:visible text-pink-600">
+    Email inválido
+  </p>
+</label>
+
+👉 Prefixos comuns: peer-focus:, peer-checked:, peer-required:.
+Também dá pra nomear peers: peer-checked/admin:.
+
+
+
+6. Pseudo-elementos (::before e ::after):
+No Tailwind, dá para usar before: e after: sem precisar escrever CSS manual.
+
+<label class="after:content-['*'] after:text-red-500">
+  Email
+  <input type="email" class="border ml-2" />
+</label>
+
+⚡ Dica: se possível, prefira usar <span> real no HTML em vez de ::before/after, mas eles são úteis em casos específicos.
+
+
+
+7. Variantes avançadas:
+
+. has-[] → aplica estilo se um elemento tiver descendente com estado específico
+. not-[] → aplica estilo quando algo não acontece
+. in-* → estilo herdado de qualquer pai sem precisar usar group
+. Arbitrary selectors → group-[.is-active]:text-red-500
+
+
+
+8. Combinando estados:
+Você pode empilhar variantes para ser mais específico:
+
+<button class="dark:md:hover:bg-fuchsia-600 px-4 py-2">
+  Save changes
+</button>
+
+. Ativado no modo dark
+. A partir do breakpoint md
+. Quando o mouse passar (hover)
+
+
+
+Resumo rápido (cola de estados):
+
+. Interação: hover:, focus:, active:, visited:
+. Estrutura: first:, last:, odd:, even:, only:, empty:
+. Formulário: disabled:, required:, invalid:, checked:
+. Pai (group): group-hover:, group-focus:, group-active:
+. Irmão (peer): peer-invalid:, peer-checked:, peer-focus:
+. Pseudo-elementos: before:, after:
+. Avançados: has-[], not-[], in-*, nth-*
+
+
+
+
+
+
+
+
+
+
+-->

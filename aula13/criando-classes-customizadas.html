@@ -1,0 +1,483 @@
+<!--
+#13 — Criando classes customizadas com Tailwind (guia completo, explicado passo-a-passo):
+
+Objetivo: aprender a criar suas próprias classes CSS junto com Tailwind, entender o que fazem as diretivas (@layer, @apply, etc.), como o build transforma seu CSS, e ter um passo a passo funcional para testar localmente.
+
+
+
+Visão geral rápida (pra situar):
+
+Você escreve um arquivo CSS de entrada (ex: src/styles/tailwind.css) que importa o Tailwind e onde você adiciona suas classes customizadas.
+. O Tailwind (plugin + CLI/PostCSS) processa esse arquivo e gera um CSS de saída (ex: dist/output.css) que contém:
+  . as utilidades do Tailwind necessárias;
+  . suas regras customizadas (expandidas, quando usar @apply);
+  . tudo pronto para usar no HTML.
+. As diretivas e funções do Tailwind são comandos que só funcionam no passo de build (ou seja, no processamento). Elas não têm efeito direto no browser sem esse processamento.
+
+
+
+1) Arquivo de entrada vs arquivo gerado — onde minha classe “vai para o tailwind.css”?
+
+. Arquivo de entrada = o CSS que você escreve (ex: src/styles/tailwind.css). Nele você coloca diretivas como @tailwind / @import e suas classes.
+. Arquivo de saída = o CSS final gerado pela CLI/PostCSS (ex: dist/output.css). É esse arquivo que o HTML importa.
+. Quando você cria .btn { @apply ... } no arquivo de entrada:
+  . O Tailwind substitui o @apply pelas declarações reais correspondentes às classes aplicadas e escreve o resultado no arquivo de saída.
+  . Se você apenas declarar .meu-utility { color: red } no arquivo de entrada, ele também aparece no arquivo de saída tal qual.
+
+Resumo: suas classes estão no arquivo de entrada e entram (convertidas/mescladas) no arquivo de saída durante o build.
+
+
+2) Diretivas principais — o que são e para que servem (explicação simples):
+
+@tailwind vs @import "tailwindcss"
+
+. Versão 3 (fluxo clássico):
+CSS:
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+  . @tailwind base traz resets e estilos base.
+  . @tailwind components traz classes de componente (se houver).
+  . @tailwind utilities traz utilitários gerados pelo Tailwind.
+
+
+
+Versão 4 (API unificada):
+CSS:
+@import "tailwindcss";
+
+  . Importa tudo de uma vez — mas você ainda pode usar @layer para organizar suas regras.
+. Em ambos os casos, esses são pontos de entrada para o Tailwind processar e gerar CSS.
+
+
+
+@layer:
+
+Organiza onde suas regras irão ser adicionadas no output. Tem três (quatro) camadas principais:
+. @layer base → resets e estilos globais (tipo h1, body, small, etc.). Baixa prioridade.
+. @layer components → classes de componente (ex: .btn, .card). Prioridade média.
+. @layer utilities → regras utilitárias pequenas (ex: .rotate-y-180). Alta prioridade.
+. @layer theme → (usado em v4) para tokens de design (variáveis CSS).
+
+Por que usar @layer? Porque a ordem importa: se você quer que sua .btn não seja sobrescrita por utilitários gerados, coloque em components. Se você quer criar um utilitário rápido, coloque em utilities.
+
+
+
+Sintaxe:
+
+@layer components {
+  .btn { @apply px-4 py-2 rounded; }
+}
+
+@layer utilities {
+  .rotate-y-180 { transform: rotateY(180deg); }
+}
+
+
+
+@apply — explicação aprofundada (muito importante):
+
+O que faz: pega uma ou várias classes utilitárias do Tailwind e insere as declarações CSS correspondentes dentro do seu seletor no momento do build.
+
+Por que usar: quando você quer criar uma classe sem repetir muitas classes no HTML. Ex.: transformar um conjunto de utilitários em .btn reutilizável.
+
+Sintaxe básica:
+
+.btn {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600;
+}
+
+
+Isso durante o build vira algo como:
+
+.btn {
+  background-color: #3b82f6; /* valor real do bg-blue-500 */
+  color: #fff;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+}
+.btn:hover {
+  background-color: #2563eb; /* hover:bg-blue-600 -> regra hover gerada */
+}
+
+
+Detalhes e regras para usar @apply:
+. O @apply só funciona enquanto você processar seu CSS com o Tailwind (CLI/PostCSS). Não funciona direto no browser.
+. Você pode aplicar utilitários simples (padding, margin, cores, display, flex, text, bg, etc.) diretamente.
+. Pode usar utilitários com variantes inline (ex.: hover:bg-blue-600) dentro do @apply 
+— o Tailwind converte em regras :hover.
+. Cuidado / limitações
+  . Não aplique utilitários que geram pseudo-elementos complexos (before:, after:) dentro de @apply — estes podem não funcionar ou gerar erro.
+  . Evite aplicar utilitários que contenham @layer/componentes complexos; prefira utilitários puros.
+  . Se der erro dizendo que não reconheceu uma classe no @apply, verifique se essa classe é realmente uma utilidade gerada (algumas config personalizadas ou arbitrárias podem não estar).
+. Onde colocar @apply? Em @layer components normalmente, pois você está criando um componente.
+
+
+
+
+@utility (v4):
+
+. Serve para registrar uma utility diretamente via CSS que suporte variantes (hover, focus, responsive).
+. Exemplo:
+CSS:
+@utility tab-4 {
+  tab-size: 4;
+}
+
+. Isso cria uma utility tab-4 que pode ser usada com variantes: hover:tab-4, md:tab-4, etc.
+
+
+
+@variant e @custom-variant:
+. @variant permite aplicar variantes em um bloco CSS:
+
+.my-element {
+  background: white;
+  @variant dark {
+    background: black;
+  }
+}
+
+. @custom-variant permite adicionar uma nova variante à sua sintaxe de classes (padrão v4). Ex.: você cria theme-midnight:bg-black.
+
+
+
+@theme:
+. Usado para declarar tokens de design (variáveis CSS) diretamente no CSS:
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --color-accent: #f00;
+}
+
+. Depois você pode usar essas var(--color-accent) no seu CSS/Tailwind. (V4 empurra a ideia de usar tokens CSS.)
+
+
+
+@source, @reference, @config, @plugin (compatibilidade / especial):
+
+. @source — informar ao Tailwind onde procurar classes (útil para bibliotecas externas).
+. @reference — importar arquivo para referência (útil ao usar @apply dentro de componentes isolados como Vue/Svelte).
+. @config e @plugin — compatibilidade com definições JS antigas (v3).
+
+
+
+3) Funções úteis (build time):
+CSS:
+. --spacing(n) → converte para calc(var(--spacing) * n) (útil em CSS customizado).
+
+.gap-custom { gap: --spacing(4); } /* vira gap: calc(var(--spacing)*4) */
+
+. --alpha() → ajusta alpha de uma cor (gera color-mix).
+CSS:
+color: --alpha(var(--color-lime-300) / 50%);
+
+
+
+4) Ordem e prioridade — por que @layer importa:
+Ordem típica (baixa → alta prioridade):
+1. @layer base (resets)
+2. @layer components (seus componentes reutilizáveis)
+3. @layer utilities (pequenas utilidades geradas)
+
+Consequência prática: se um utilitário gerado tem a mesma especificidade, a regra de utilities vai “vencer” uma regra definida em components se ambas gerarem o mesmo seletor. Portanto, se quiser que seu .btn tenha prioridade sobre utilitários, coloque regras específicas ou use !important com parcimônia — mas normalmente você organiza para evitar conflito.
+
+
+
+
+5) Passo a passo prático (do zero) — projeto estático com CLI (Windows):
+Vou te dar um passo a passo que funciona com Tailwind v4 (recomendado). No final entrego também a variação v3 (se você quiser usar npx tailwindcss init).
+
+Estrutura que vamos criar
+meu-projeto/
+  package.json
+  tailwind.config.js
+  src/
+    index.html
+    styles/
+      tailwind.css    <-- arquivo de entrada (você escreve aqui)
+  dist/
+    output.css       <-- gerado pelo Tailwind CLI
+
+
+
+
+1) Criar projeto e instalar Tailwind (no terminal, dentro de meu-projeto):
+npm init -y
+npm install -D tailwindcss@latest
+
+  (Se quiser também PostCSS/Autoprefixer, instale postcss autoprefixer — mas o CLI do Tailwind não exige PostCSS obrigatoriamente.)
+
+
+
+
+2) Criar tailwind.config.js (v4 — ESM):
+
+Crie arquivo tailwind.config.js na raiz com:
+
+export default {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+  - Se preferir CJS (alguns setups): module.exports = { ... } — mas v4 recomenda ESM export default.
+
+
+
+3) Criar arquivo de entrada CSS src/styles/tailwind.css:
+/* src/styles/tailwind.css */
+
+/* IMPORT do Tailwind: em v4 você pode usar @import "tailwindcss"; */
+@import "tailwindcss";
+
+/* Ou (se preferir estilo v3) você pode ter esses três:
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+*/
+
+/* ========== customizações ========== */
+
+/* 1) tokens (opcional) */
+@theme {
+  --brand: #0ea5e9;
+  --brand-dark: #0369a1;
+}
+
+/* 2) componentes com @apply */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600;
+  }
+  .card {
+    @apply p-6 bg-white rounded-xl shadow-md dark:bg-gray-800 dark:text-white;
+  }
+}
+
+/* 3) utilities custom */
+@layer utilities {
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+/* 4) variáveis e configurações extras se quiser */
+
+
+
+
+
+4) Criar src/index.html (exemplo):
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Teste Tailwind Custom</title>
+    <link rel="stylesheet" href="../dist/output.css" />
+  </head>
+  <body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+    <div class="space-y-4 text-center">
+      <button class="btn-primary">Meu botão (btn-primary)</button>
+      <div class="card w-80 mx-auto">Este é um card. <div class="mt-4 rotate-y-180">rotacionado</div></div>
+    </div>
+
+    script para alternar dark mode (apenas de teste) 
+    <script>
+      document.documentElement.addEventListener('dblclick', () => {
+        document.documentElement.classList.toggle('dark');
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+5) Rodar o Tailwind CLI para gerar dist/output.css:
+
+No terminal:
+
+npx tailwindcss -i ./src/styles/tailwind.css -o ./dist/output.css --watch
+
+
+
+Explicação:
+
+. -i = arquivo de input (o CSS que você escreveu);
+. -o = arquivo de output (arquivo final que o browser vai usar);
+. --watch = recompila automaticamente quando salvar.
+
+Abra src/index.html (ou sirva com live-server) e a página mostrará o botão e card com as classes customizadas funcionando.
+
+
+
+
+6) Observações práticas e erros comuns:
+
+a) @apply dá erro “class not found”
+. Verifique se a classe que você passou no @apply é realmente uma utilidade do Tailwind (ex.: bg-blue-500, px-4).
+. Para classes que dependem de configuração customizada, confirme que o tailwind.config.js está correto e que o build está usando ele.
+. Se aplicar variantes aninhadas complexas, às vezes é melhor usar @variant ou escrever as regras manualmente.
+
+
+b) Ordem: customizações não aparecem / são sobrescritas:
+. Lembre de usar @layer components para componentes e @layer utilities para utils.
+. Caso precise forçar prioridade pontual, use seletores mais específicos ou !important (como último recurso).
+
+
+c) A classe customizada aparece no input mas não no output:
+. Certifique-se que o arquivo de entrada src/styles/tailwind.css está realmente o -i passado ao CLI.
+. Abra o dist/output.css e procure pelo seletor — se não estiver, o build não está processando corretamente.
+
+
+d) Por que o Tailwind gera só as classes que eu usei?
+. O Tailwind gera utilitários baseado nas classes encontradas em seus arquivos apontados pelo content (scan). Isso é para reduzir o CSS final.
+. Mas o CSS que você escreve manualmente em @layer será sempre incluído (porque está no arquivo de entrada).
+
+
+
+
+7) Exemplo mais completo: separar por pastas e modularizar (bom pra projetos maiores):
+
+Estrutura:
+LUA
+src/
+  styles/
+    base.css        <-- tokens + resets (opcional)
+    components.css  <-- todos os @layer components
+    utilities.css   <-- utilitários customizados
+    tailwind.css    <-- importa os anteriores + @import "tailwindcss"
+
+
+src/styles/tailwind.css:
+CSS:
+@import "tailwindcss";
+
+/* importar módulos */
+@import "./base.css";
+@import "./components.css";
+@import "./utilities.css";
+
+Dessa forma você organiza as classes customizadas por arquivo. O CLI só precisa processar tailwind.css que importa os outros.
+
+
+
+8) @utility, @variant e @custom-variant — exemplos rápidos:
+
+@utility:
+
+@utility skip-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+Agora pode usar skip-scrollbar (e variantes hover:skip-scrollbar, md:skip-scrollbar).
+
+
+@variant:
+CSS:
+.my-box {
+  background: white;
+  @variant dark {
+    background: black;
+  }
+}
+
+
+@custom-variant (v4): cria um novo prefixo:
+CSS:
+@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+/* gera a possibilidade de usar: theme-midnight:bg-black */
+
+
+
+9) @apply — dicas práticas (resumão):
+. Use para criar classes de componente com as mesmas utilidades que usaria no HTML.
+. Funciona bem para: botões, cards, inputs, badges.
+. Não aplique utilitários que:
+  . geram pseudo-elementos complexos;
+  . são específicos de 1 elemento (ex.: prose-* de typography plugin pode não aplicar bem).
+. Você pode combinar variantes dentro do @apply (ex: hover:bg-blue-700), mas se ficar difícil, use @variant.
+
+
+
+10) Variação: se você quer usar o comando init (Tailwind v3):
+Se seu curso usou npx tailwindcss init e você prefere esse fluxo:
+BASH:
+npm install -D tailwindcss@3
+npx tailwindcss init -p    # cria tailwind.config.js + postcss.config.js
+
+Mas não é obrigatório; eu recomendo usar a versão mais nova (@latest) a menos que precise exatamente do comportamento da v3.
+
+
+
+
+11) Checklist final — o que você precisa lembrar quando for criar uma classe customizada
+1. Criar arquivo de entrada (ex: src/styles/tailwind.css) com @import "tailwindcss" ou @tailwind base; @tailwind components; @tailwind utilities;.
+2. Colocar seu CSS customizado usando @layer components (para componentes) ou @layer utilities (para utilitários).
+3. Usar @apply para reaproveitar utilitários do Tailwind dentro das suas classes.
+4. Garantir tailwind.config.js com content apontando para seus arquivos HTML/JS/TSX para o Tailwind gerar/utilizar utilitários dinamicamente.
+5. Executar CLI:
+
+npx tailwindcss -i ./src/styles/tailwind.css -o ./dist/output.css --watch
+
+6. Importar dist/output.css no seu HTML.
+7. Testar — verifique dist/output.css se algo não aparecer.
+
+
+
+12) Material extra — exemplos práticos prontos para copiar/colar:
+tailwind.config.js (ESM — v4):
+export default {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          light: "#3AB0FF",
+          DEFAULT: "#0077FF",
+          dark: "#004C99",
+        }
+      }
+    },
+  },
+  plugins: [],
+}
+
+src/styles/tailwind.css:
+CSS:
+@import "tailwindcss";
+
+/* tokens */
+@theme {
+  --brand: #0077FF;
+}
+
+/* components */
+@layer components {
+  .btn-primary {
+    @apply bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand-dark;
+  }
+}
+
+/* utilities */
+@layer utilities {
+  .rotate-y-180 { transform: rotateY(180deg); }
+}
+
+
+src/index.html:
+<link rel="stylesheet" href="../dist/output.css">
+<button class="btn-primary">Botão</button>
+<div class="rotate-y-180">rotacionado</div>
+
+
+
+-->

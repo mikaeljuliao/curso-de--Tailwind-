@@ -1,0 +1,258 @@
+<!--
+#11 - Arquivo de configuração
+
+📌 O que é?
+O arquivo de configuração do Tailwind é onde personalizamos o framework para o nosso projeto.  
+Nele podemos:
+
+- Adicionar novas variantes (cores, espaçamentos, fontes, breakpoints, etc.)
+- Configurar plugins extras
+- Criar atalhos de classes (presets)
+- Definir onde o Tailwind deve procurar por classes no projeto
+
+Por padrão, o arquivo se chama:
+
+- tailwind.config.js (JavaScript)
+- tailwind.config.ts (TypeScript)
+
+---
+
+## 1. Como criar o arquivo de configuração
+
+### 🔹 Tailwind v3 (até 2023)
+No Tailwind v3, bastava rodar:
+    npx tailwindcss init
+
+Isso gerava o arquivo:
+    // tailwind.config.js
+    module.exports = {
+      content: [],
+      theme: {
+        extend: {},
+      },
+      plugins: [],
+    }
+
+👉 Para gerar o arquivo já com todas as configs padrão:
+    npx tailwindcss init -full
+
+---
+
+### 🔹 Tailwind v4 (atual)
+No Tailwind v4 (2024+), o comando `init` foi removido.  
+Agora o Tailwind funciona no modo **zero-config** (já vem pronto para uso sem precisar de configuração).
+
+Se quiser customizar, criamos manualmente o arquivo `tailwind.config.js` dentro do projeto.  
+No v4, usamos **ESM (ECMAScript Modules)**, ou seja, `export default` em vez de `module.exports`.
+
+Exemplo básico (v4):
+
+    // tailwind.config.js
+    export default {
+      content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+      theme: {
+        extend: {},
+      },
+      plugins: [],
+    }
+
+---
+
+## 2. A propriedade `content` (muito importante!)
+
+O Tailwind precisa saber onde procurar as classes no seu projeto.  
+Se você esquecer, nada vai funcionar.
+
+Exemplo para um projeto React (v4):
+
+    export default {
+      content: [
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
+      ],
+      theme: {
+        extend: {},
+      },
+      plugins: [],
+    }
+
+- `"./index.html"` → HTML principal
+- `"./src/**/*.{js,ts,jsx,tsx}"` → todos os arquivos da pasta `src` que terminam com essas extensões
+
+---
+
+## 3. Customizando o tema (`theme`)
+
+A chave `theme` permite mudar cores, fontes, espaçamentos, breakpoints, etc.
+
+### Exemplo com cores:
+    export default {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              light: "#3AB0FF",
+              DEFAULT: "#0077FF",
+              dark: "#004C99",
+            },
+          },
+        },
+      },
+    }
+
+Uso:
+    <button class="bg-brand text-white hover:bg-brand-dark">
+      Comprar
+    </button>
+
+### Exemplo com fontes:
+    export default {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            title: ["Poppins", "sans-serif"],
+          },
+        },
+      },
+    }
+
+Uso:
+    <h1 class="font-title text-4xl">Título estiloso</h1>
+
+### Exemplo com breakpoints:
+    export default {
+      theme: {
+        extend: {
+          screens: {
+            tablet: "640px",
+            laptop: "1024px",
+            desktop: "1280px",
+          },
+        },
+      },
+    }
+
+Uso:
+    <div class="bg-red-500 tablet:bg-blue-500 laptop:bg-green-500">
+      Responsivo com breakpoints customizados
+    </div>
+
+---
+
+## 4. Extend vs Override
+
+- **extend** → adiciona novas opções sem apagar as padrões
+- **direto no theme** → sobrescreve tudo
+
+Exemplo sobrescrevendo:
+    theme: {
+      colors: {
+        primary: "#FF0000", // apaga TODAS as cores padrão
+      }
+    }
+
+Exemplo estendendo:
+    theme: {
+      extend: {
+        colors: {
+          primary: "#FF0000", // adiciona sem perder as cores padrão
+        }
+      }
+    }
+
+---
+
+## 5. Plugins no arquivo de configuração
+
+Podemos adicionar funcionalidades extras usando a chave `plugins`.
+
+Exemplo com plugin de formulários:
+    npm install -D @tailwindcss/forms
+
+Config:
+    export default {
+      plugins: [
+        require("@tailwindcss/forms"),
+      ],
+    }
+
+📌 Plugins oficiais úteis:
+- @tailwindcss/forms → estiliza inputs
+- @tailwindcss/typography → estiliza textos longos
+- @tailwindcss/aspect-ratio → controla proporção de imagens/vídeos
+
+---
+
+## 6. Dark Mode
+
+Definimos como o modo escuro vai funcionar:
+
+    export default {
+      darkMode: "class", // ou "media"
+    }
+
+- `media` → usa a preferência do sistema do usuário
+- `class` → depende de você adicionar `class="dark"` no `<html>` ou `<body>`
+
+Exemplo:
+    <div class="bg-white text-black dark:bg-black dark:text-white">
+      Suporta dark mode!
+    </div>
+
+---
+
+## 7. Configurações avançadas (exemplos úteis)
+
+### Centralizar o container automaticamente:
+    theme: {
+      container: {
+        center: true,
+        padding: "2rem",
+      },
+    }
+
+### Criar espaçamentos extras:
+    theme: {
+      extend: {
+        spacing: {
+          "128": "32rem",
+          "144": "36rem",
+        }
+      }
+    }
+
+Uso:
+    <div class="mt-128 bg-gray-200">Espaçamento customizado</div>
+
+---
+
+## 8. Como criar manualmente no Windows (v4)
+
+Se o comando `npx tailwindcss init` não funcionar (como no v4), crie manualmente:
+
+- No VS Code → clique em **Novo Arquivo**, salve como `tailwind.config.js`
+- Cole dentro:
+      export default {
+        content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+        theme: {
+          extend: {},
+        },
+        plugins: [],
+      }
+
+Ou via terminal (Windows PowerShell):
+    echo "export default { content: ['./index.html'], theme: { extend: {} }, plugins: [] }" > tailwind.config.js
+
+---
+
+## 9. Resumo rápido
+
+- Criar config (v3): `npx tailwindcss init`
+- Criar config (v4): arquivo manual `tailwind.config.js`
+- `content`: define onde procurar classes
+- `theme`: personaliza cores, fontes, espaçamentos, breakpoints
+- `extend`: adiciona sem sobrescrever
+- `plugins`: adiciona funcionalidades extras
+- `darkMode`: define suporte ao modo escuro
+-->
