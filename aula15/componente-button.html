@@ -1,0 +1,137 @@
+<!--
+
+
+#15 – Componente Button no TailwindCSS:
+O button é um dos componentes mais comuns em qualquer projeto. Ele serve para interações do usuário, como enviar formulários, abrir modais ou executar funções via JavaScript.
+
+O Tailwind facilita muito a criação de botões personalizados, responsivos e reutilizáveis, sem precisar escrever CSS manualmente.
+
+
+1. Estrutura básica de um botão:
+
+Um botão no HTML:
+<button>Click me</button>
+
+
+Com Tailwind, aplicamos classes utilitárias para definir cor, tipografia, espaçamento e estados:
+<button class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+  Click me
+</button>
+
+
+Explicação:
+. bg-blue-500 → fundo azul médio.
+. text-white → texto branco.
+. px-4 py-2 → padding horizontal e vertical.
+. rounded-lg → cantos arredondados.
+
+
+
+2. Estados de interação (hover, focus, active):
+
+No Tailwind podemos usar prefixos de variantes para modificar o estilo em interações:
+
+<button class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus:ring-2 focus:ring-blue-300 text-white px-4 py-2 rounded-lg">
+  Interativo
+</button>
+
+. hover:bg-blue-600 → cor muda quando o usuário passa o mouse.
+. active:bg-blue-700 → cor muda quando o botão está sendo clicado.
+. focus:ring-2 focus:ring-blue-300 → cria um efeito de foco (acessibilidade).
+
+
+
+3. Botões com ícones:
+Podemos usar botões que combinam ícones + texto.
+
+<button class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+  </svg>
+  Adicionar
+</button>
+
+. flex items-center gap-2 → organiza ícone e texto lado a lado com espaçamento.
+
+
+
+4. Variantes de botões:
+
+Você pode criar diferentes estilos de botão no mesmo projeto.
+
+Botão primário (ação principal):
+<button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium">
+  Enviar
+</button>
+
+Botão secundário (ação menos importante):
+<button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-lg font-medium">
+  Cancelar
+</button>
+
+Botão com borda (outline):
+<button class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-5 py-2 rounded-lg">
+  Outline
+</button>
+
+
+
+5. Responsividade em botões:
+
+Você pode mudar o tamanho dos botões conforme o dispositivo:
+
+<button class="bg-purple-500 text-white px-2 py-1 md:px-4 md:py-2 lg:px-6 lg:py-3 rounded-lg">
+  Responsivo
+</button>
+
+. Em telas menores → botão pequeno.
+. Em telas médias → tamanho normal.
+. Em telas grandes → botão maior.
+
+
+
+6. Criando um botão reutilizável com @apply:
+
+Se você vai usar o mesmo estilo de botão em várias partes do projeto, é melhor criar uma classe customizada no seu app.css (ou tailwind.css):
+
+/* app.css */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+}
+
+.btn-outline {
+  @apply border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white;
+}
+
+
+Uso no HTML:
+
+<button class="btn btn-primary">Salvar</button>
+<button class="btn btn-secondary">Cancelar</button>
+<button class="btn btn-outline">Mais detalhes</button>
+
+7. Dicas importantes
+. Use transition-colors para animações suaves entre estados.
+. Combine com dark mode (dark:bg-gray-700, dark:text-white).
+. Utilize disabled:opacity-50 disabled:cursor-not-allowed para botões desativados.
+. Mantenha consistência visual: defina um padrão de botões para o projeto (primário, secundário, outline).
+
+
+📌 Resumo (cola rápida):
+. bg-... → cor de fundo.
+. text-... → cor do texto.
+. px/py → padding.
+. rounded-lg → borda arredondada.
+. Prefixos → hover:, focus:, active:, disabled:.
+. Pode criar classes personalizadas com @apply para reutilizar estilos.
+
+
+-->

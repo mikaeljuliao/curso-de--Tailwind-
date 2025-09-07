@@ -1,0 +1,135 @@
+<!--
+
+Aula #16 – Componente Badge:
+
+
+🔹 O que é um Badge?
+Um Badge é um pequeno marcador usado para destacar informações adicionais ou complementares a outro conteúdo.
+
+. Normalmente aparece como uma etiqueta, selo ou contador.
+. É muito usado para indicar status, notificações, categorias, novidades ou até quantidades.
+. Exemplo: aquele círculo vermelho no ícone de notificações mostrando quantas mensagens novas você tem.
+
+No Tailwind, como não existe um componente nativo de Badge, construímos manualmente utilizando utilitários de estilo.
+
+
+
+🔹 Estrutura básica de um Badge:
+. Um Badge é basicamente um span ou div com estilização simples:
+. Background para chamar atenção.
+. Texto pequeno para caber dentro.
+. Bordas arredondadas (normalmente rounded-full ou rounded-lg).
+. Padding pequeno (geralmente px-2 py-1).
+. Fonte ajustada (text-xs ou text-sm).
+
+Exemplo básico:
+<span class="bg-blue-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+  Novo
+</span>
+
+
+
+🔹 Variações de Badge:
+
+1. Badge com cores diferentes:
+<span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full">Ativo</span>
+<span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full">Erro</span>
+<span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">Pendente</span>
+
+
+2. Badge com borda:
+<span class="border border-blue-500 text-blue-500 text-xs px-2 py-1 rounded-full">
+  Destaque
+</span>
+
+
+3. Badge em ícones (exemplo de notificações):
+<div class="relative inline-block">
+  <button class="relative">
+    🔔
+    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
+      3
+    </span>
+  </button>
+</div>
+
+
+4. Badge como etiqueta de categoria:
+<span class="bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded">
+  Tecnologia
+</span>
+
+
+
+🔹 Badge com Ícones de Status (Ativo, Inativo, Em Progresso):
+
+Esses exemplos são úteis para indicar o status de um usuário, tarefa ou processo.
+
+- Ativo 
+<span class="flex items-center gap-1 bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">
+  <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+  Ativo
+</span>
+
+- Inativo
+<span class="flex items-center gap-1 bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full">
+  <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+  Inativo
+</span>
+
+- Em Progresso 
+<span class="flex items-center gap-1 bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full">
+  <span class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+  Em Progresso
+</span>
+
+. Ativo → bolinha verde fixa.
+. Inativo → bolinha vermelha fixa.
+. Em Progresso → bolinha amarela piscando (animate-pulse).
+
+
+
+🔹 Conceitos importantes sobre Badge:
+. Sempre usar fontes pequenas para manter o badge proporcional.
+. Utilizar cores contrastantes (fundo x texto) para melhor legibilidade.
+. Geralmente o formato é circular ou retangular com cantos arredondados.
+. Pode ser posicionado de forma inline (ao lado do texto) ou absoluta (em cima de ícones).
+
+
+
+🔹 Criando um Badge reutilizável:
+
+Você pode criar um componente React para reutilizar.
+
+export default function Badge({ children, color }) {
+  const base = "text-xs px-2 py-1 rounded-full font-medium flex items-center gap-1";
+  const colors = {
+    blue: "bg-blue-100 text-blue-700",
+    red: "bg-red-100 text-red-700",
+    green: "bg-green-100 text-green-700",
+    yellow: "bg-yellow-100 text-yellow-700",
+  };
+
+  return (
+    <span className={`${base} ${colors[color] || colors.blue}`}>
+      {children}
+    </span>
+  );
+}
+
+
+Uso:
+
+<Badge color="green">Ativo</Badge>
+<Badge color="red">Inativo</Badge>
+<Badge color="yellow">Em Progresso</Badge>
+
+
+👉 Essa foi a Aula #16 – Badge, cobrindo:
+. O que é,
+. Como estilizar,
+. Variações,
+. Status com ícones (Ativo, Inativo, Em Progresso),
+. E como criar um componente reutilizável no React.
+
+-->
