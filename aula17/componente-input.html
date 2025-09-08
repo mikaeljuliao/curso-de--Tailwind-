@@ -1,0 +1,524 @@
+<!--
+Aula #17 – Componente Input:
+
+🔹 O que é um Input?
+O input é um dos elementos mais importantes em qualquer formulário, pois permite que o usuário insira informações (texto, número, email, senha, datas, arquivos e muito mais).
+Com o Tailwind CSS, conseguimos estilizar o input de forma simples e reutilizável, controlando:
+
+. Tamanho e espaçamento
+. Bordas e cores
+. Estados (hover, focus, disabled, etc.)
+. Placeholder (texto exibido dentro do input antes do usuário digitar)
+. Sombras e efeitos visuais (shadow, ring, etc.)
+. Transições e animações
+
+
+
+🔹 Estrutura básica de um Input:
+<input 
+  type="text" 
+  placeholder="Digite seu nome" 
+  class="border border-gray-300 rounded-lg px-4 py-2"
+/>
+
+Explicação:
+. border border-gray-300 → cria uma borda cinza clara.
+. rounded-lg → deixa os cantos arredondados.
+. px-4 py-2 → adiciona espaçamento interno (padding).
+
+Esse é o ponto de partida de qualquer input no Tailwind.
+
+
+
+🔹 Trabalhando com Placeholder:
+
+O placeholder é o texto exibido dentro do input antes do usuário digitar.
+No Tailwind, podemos personalizar o placeholder usando prefixos.
+
+Exemplo simples:
+<input 
+  type="email" 
+  placeholder="Digite seu email"
+  class="border border-gray-300 rounded-lg px-4 py-2 placeholder-gray-400 placeholder-italic"
+/>
+
+Explicação:
+. placeholder-gray-400 → muda a cor do placeholder.
+. placeholder-italic → deixa o texto em itálico.
+
+
+
+🔹 Todas as opções para Placeholder no Tailwind:
+O Tailwind permite estilizar o placeholder com praticamente as mesmas utilidades de texto que usamos normalmente, mas sempre prefixando com placeholder:.
+
+✅ Cor do placeholder:
+
+<input type="text" placeholder="Nome" class="placeholder-red-500" />
+<input type="text" placeholder="Nome" class="placeholder-blue-400" />
+
+
+✅ Opacidade do placeholder:
+
+<input type="text" placeholder="Nome" class="placeholder-opacity-50" />
+
+
+✅ Fonte do placeholder:
+
+<input type="text" placeholder="Nome" class="placeholder-italic" />
+<input type="text" placeholder="Nome" class="placeholder-normal" />
+
+
+✅ Tamanho do placeholder (font-size):
+
+<input type="text" placeholder="Nome" class="placeholder:text-sm" />
+<input type="text" placeholder="Nome" class="placeholder:text-lg" />
+
+
+✅ Transformações de texto no placeholder:
+
+<input type="text" placeholder="nome" class="placeholder:uppercase" />
+<input type="text" placeholder="NOME" class="placeholder:lowercase" />
+<input type="text" placeholder="Nome Sobrenome" class="placeholder:capitalize" />
+
+
+✅ Alinhamento do placeholder (em inputs grandes como textarea):
+
+<textarea placeholder="Escreva algo..." class="placeholder:text-center"></textarea>
+
+
+✅ Espaçamento entre letras no placeholder:
+
+<input type="text" placeholder="Nome" class="placeholder:tracking-widest" />
+
+
+👉 Resumindo: tudo que você pode aplicar em texto normal (text-, tracking-, uppercase, etc.) pode ser usado no placeholder: também.
+
+
+
+🔹 Estados de Focus:
+
+Quando o usuário clica no input, ele entra no estado de focus.
+Por padrão, o navegador adiciona um outline azul, mas no Tailwind podemos personalizar ou remover isso.
+
+Exemplo básico (sem comportamento padrão):
+<input 
+  type="text" 
+  placeholder="Sem outline padrão"
+  class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
+Explicação:
+. focus:outline-none → remove o contorno azul padrão do navegador.
+. focus:ring-2 → adiciona um anel (ring) de 2px ao redor do input.
+. focus:ring-blue-500 → define a cor do ring em azul.
+
+Isso deixa o input mais bonito e moderno, além de dar feedback visual ao usuário.
+
+
+
+🔹 Aula extra: O que é o Ring no Tailwind?
+
+O ring é uma espécie de sombra externa (parecida com um glow) que substitui o outline padrão do navegador.
+Ele é muito usado em inputs e botões para indicar foco de forma clara e acessível.
+
+Propriedades principais do Ring:
+
+✅ Espessura (thickness):
+. ring-0 → remove qualquer ring.
+. ring-1, ring-2, ring-4, ring-8 → define a espessura do anel.
+
+
+✅ Cor:
+. ring-blue-500, ring-red-500, etc → define a cor do anel.
+
+✅ Offset (distância do ring em relação ao elemento):
+. ring-offset-0, ring-offset-2, ring-offset-4... → cria um espaço entre o elemento e o ring.
+. Útil quando o input tem background colorido.
+
+✅ Cor do offset:
+. ring-offset-white, ring-offset-gray-900 → define a cor do espaço entre o elemento e o ring.
+
+Exemplo avançado:
+<input 
+  type="password"
+  placeholder="Digite sua senha"
+  class="border rounded-lg px-4 py-2 focus:ring-4 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-gray-50"
+/>
+
+
+Explicação:
+. focus:ring-4 → espessura de 4px.
+. focus:ring-red-400 → cor vermelha no ring.
+. focus:ring-offset-2 → adiciona espaço entre o input e o ring.
+. focus:ring-offset-gray-50 → define a cor desse espaço como cinza bem claro.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🎨 Tailwind Transitions:
+🔹 O que são Transitions?
+Transitions no Tailwind permitem controlar como uma propriedade CSS muda de um valor para outro.
+Por exemplo: quando um botão muda de cor ao passar o mouse, a transição pode ser instantânea (sem transition) ou suave (com transition).
+
+O Tailwind fornece várias utilities para definir:
+. quais propriedades vão transicionar,
+. a duração da transição,
+. o tipo de easing (curva de aceleração/desaceleração),
+. o atraso antes da transição começar,
+. o comportamento (normal/discrete).
+
+
+
+🔹 transition-property:
+
+Controla quais propriedades CSS vão sofrer transição.
+
+Classes principais:
+. transition → aplica transições para várias propriedades comuns (cores, opacidade, transform, sombras etc).
+. transition-all → aplica para todas as propriedades possíveis.
+. transition-colors → apenas cores (background, border, text, etc).
+. transition-opacity → apenas a opacidade.
+. transition-shadow → apenas sombras.
+. transition-transform → apenas transformações (translate, scale, rotate).
+. transition-none → desabilita transições.
+. transition-[<value>] → permite definir qualquer propriedade customizada.
+. transition-(<custom-property>) → para CSS variables personalizadas.
+
+Exemplo básico:
+<button class="bg-blue-500 text-white px-4 py-2 rounded 
+               transition-colors duration-300 ease-in-out
+               hover:bg-indigo-500">
+  Salvar
+</button>
+
+
+➡ Aqui apenas a cor de fundo vai ter transição suave ao passar o mouse.
+
+
+
+🔹 transition-behavior:
+Define como as transições se comportam quando são aplicadas a propriedades que mudam de forma discreta (ex: display ou visibility).
+
+Classes:
+. transition-normal → comportamento normal.
+. transition-discrete → permite animar propriedades de valores discretos (como "block" → "hidden").
+
+Exemplo:
+- Sem discrete 
+<button class="hidden transition-all not-peer-has-checked:opacity-0 peer-has-checked:block">
+  Apareço instantaneamente
+</button>
+
+- Com discrete 
+<button class="hidden transition-all transition-discrete 
+               not-peer-has-checked:opacity-0 peer-has-checked:block">
+  Apareço suavemente
+</button>
+
+
+
+
+
+🔹 transition-duration:
+
+Define quanto tempo a transição leva para acontecer.
+
+Classes:
+. duration-75, duration-100, duration-150, duration-300, duration-700, etc.
+. duration-initial → volta para o valor initial.
+. duration-[<value>] → aceita valores customizados (duration-[1s]).
+. duration-(<custom-property>) → usando variáveis CSS.
+
+Exemplo:
+<button class="bg-green-500 text-white px-4 py-2 rounded
+               transition duration-700 ease-in-out
+               hover:bg-green-700">
+  Hover mais lento
+</button>
+
+
+
+
+🔹 transition-timing-function:
+
+Define o ritmo da transição (curva de aceleração).
+
+Classes principais:
+. ease-linear → velocidade constante.
+. ease-in → começa devagar, acelera no final.
+. ease-out → começa rápido, desacelera no final.
+. ease-in-out → começa devagar, acelera e desacelera.
+. ease-[cubic-bezier(...)] → valores personalizados.
+. ease-(<custom-property>) → usa variáveis CSS.
+
+Exemplo:
+<button class="bg-purple-500 text-white px-4 py-2 rounded
+               transition duration-500 ease-in-out
+               hover:translate-y-2 hover:bg-purple-700">
+  Suavidade máxima
+</button>
+
+
+
+🔹 transition-delay:
+Define um atraso antes da transição começar.
+
+Classes:
+. delay-75, delay-100, delay-150, delay-300, delay-700.
+. delay-[<value>] → valores customizados (delay-[2s]).
+. delay-(<custom-property>) → usando variáveis CSS.
+
+Exemplo:
+<button class="bg-red-500 text-white px-4 py-2 rounded
+               transition duration-500 delay-300
+               hover:bg-red-700">
+  Demora pra mudar
+</button>
+
+🔹 Exemplo completo
+<button class="bg-blue-500 text-white px-4 py-2 rounded
+               transition-colors duration-700 ease-in-out delay-150
+               hover:bg-indigo-500 hover:scale-110">
+  Save Changes
+</button>
+
+
+➡ Aqui temos:
+. transition-colors (apenas cores mudam com suavidade)
+. duration-700 (leva 0.7s)
+. ease-in-out (suavidade no início e no fim)
+. delay-150 (espera 0.15s antes de começar)
+. No hover: muda cor e aplica escala
+
+
+
+
+
+
+
+
+
+
+
+
+🎬 Tailwind Animations
+🔹 O que são Animations?
+Diferente das transitions (que apenas suavizam a mudança de uma propriedade já existente), as animations permitem criar movimentos contínuos ou repetitivos usando @keyframes.
+
+No Tailwind, já existem animações prontas (spin, bounce, ping, pulse), mas também é possível criar animações personalizadas.
+
+🔹 Classes principais de animação
+1. animate-spin
+. Faz o elemento girar em torno do seu centro.
+. Geralmente usado em ícones de carregamento.
+
+
+
+2. animate-ping:
+. Cria um efeito de onda expansiva (escala e desaparece).
+. Muito usado em badges de notificação.
+
+<span class="relative flex h-3 w-3">
+  <span class="absolute inline-flex h-full w-full rounded-full 
+               bg-sky-400 opacity-75 animate-ping"></span>
+  <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+</span>
+
+
+
+3. animate-pulse:
+. Faz o elemento “piscar” suavemente (opacidade indo e voltando).
+. Usado para indicadores de status ou placeholders.
+
+<div class="w-32 h-8 bg-gray-300 rounded animate-pulse"></div>
+
+
+
+4. animate-bounce:
+. Faz o elemento “quicar” para cima e para baixo.
+. Útil em setas de rolagem ou botões de call-to-action.
+
+<div class="animate-bounce text-4xl">⬇️</div>
+
+
+
+5. animate-none
+. Remove qualquer animação aplicada.
+
+<div class="animate-none">Sem animação</div>
+
+
+
+
+🔹 Animações personalizadas:
+Usando animate-[<value>]
+
+Permite aplicar animações próprias:
+
+<div class="animate-[wiggle_1s_ease-in-out_infinite]">👋</div>
+
+<style>
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+</style>
+
+
+
+
+Usando animate-(<custom-property>):
+Permite usar variáveis CSS para animações.
+
+<div class="animate-(--my-animation)">Custom</div>
+
+<style>
+:root {
+  --my-animation: bounce 2s infinite;
+}
+</style>
+
+
+
+
+🔹 Combinação com variantes:
+
+Você pode usar motion-safe e motion-reduce para respeitar preferências do usuário em relação a movimentos:
+
+<button class="motion-safe:animate-spin motion-reduce:animate-none">
+  ♻️
+</button>
+
+🔹 Exemplo prático completo
+
+Botão de carregamento com spinner:
+
+<button type="button" 
+        class="bg-indigo-600 text-white px-4 py-2 rounded flex items-center" 
+        disabled>
+  <svg class="mr-3 size-5 animate-spin text-white" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" 
+            stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor" 
+          d="M4 12a8 8 0 018-8V0C5.373..."></path>
+  </svg>
+  Processando…
+</button>
+
+
+
+
+Badge de notificação com ping:
+
+<span class="relative flex h-3 w-3">
+  <span class="absolute inline-flex h-full w-full rounded-full 
+               bg-red-400 opacity-75 animate-ping"></span>
+  <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+Parte 4 – Combinação de Transitions + Animations no Tailwind
+
+Até agora você viu Transitions (suaves mudanças de propriedades) e Animations (movimentos contínuos ou cíclicos). Mas o mais poderoso é combinar as duas coisas para criar efeitos modernos e fluidos em seus componentes.
+
+🔹 Diferença entre Transition e Animation
+. Transition → acontece quando algo muda (exemplo: hover, focus, active).
+. Animation → roda de forma automática ou infinita (exemplo: loader girando, ícone pulsando).
+
+👉 Ou seja: transitions dependem de uma interação, já animations acontecem sozinhas.
+
+🔹 Exemplo prático: botão com transição suave
+<button class="bg-blue-500 text-white px-6 py-2 rounded-lg 
+               transition-colors duration-300 ease-in-out 
+               hover:bg-blue-600 hover:scale-105">
+  Clique aqui
+</button>
+
+
+✔️ O botão muda de cor suavemente (transition-colors).
+✔️ Também cresce levemente (hover:scale-105).
+
+🔹 Exemplo prático: loader com animation
+<div class="w-10 h-10 border-4 border-blue-500 border-t-transparent 
+            rounded-full animate-spin"></div>
+
+
+✔️ Esse círculo gira infinitamente.
+✔️ Usamos animate-spin e removemos a cor da borda superior (border-t-transparent) para dar o efeito de carregamento.
+
+
+
+🔹 Combinação de Transition + Animation::
+Agora vem o pulo do gato: usar os dois juntos.
+
+1. Badge de notificação com “ping”
+<span class="relative flex h-3 w-3">
+  <span class="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 animate-ping"></span>
+  <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500 transition-transform hover:scale-125"></span>
+</span>
+
+✔️ animate-ping → cria a onda infinita (efeito radar).
+✔️ transition-transform hover:scale-125 → quando o usuário passa o mouse, o ponto cresce suavemente.
+
+
+
+2. Card com animação + transição:
+<div class="bg-white p-6 rounded-xl shadow-md 
+            transition-all duration-500 ease-in-out 
+            hover:shadow-2xl hover:-translate-y-2 animate-pulse">
+  <h3 class="text-lg font-semibold">Card animado</h3>
+  <p class="text-gray-600">Esse card pulsa suavemente e ganha destaque ao passar o mouse.</p>
+</div>
+
+✔️ animate-pulse → o card fica com efeito de respiração.
+✔️ hover:-translate-y-2 + hover:shadow-2xl → ao passar o mouse, ele sobe e ganha mais sombra.
+✔️ transition-all duration-500 → garante que isso aconteça de forma suave.
+
+
+
+
+3. Botão de “carregando”:
+<button class="flex items-center bg-indigo-600 text-white px-5 py-2 rounded-lg 
+               transition-colors duration-300 hover:bg-indigo-700">
+  <svg class="w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="white" stroke-width="4"></circle>
+    <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a12 12 0 00-12 12h4z"></path>
+  </svg>
+  Carregando...
+</button>
+
+✔️ O botão já tem uma transition de cor.
+✔️ Enquanto isso, o ícone dentro roda com animate-spin.
+
+
+
+
+🔹 Boas práticas:
+. Use transition para interações do usuário.
+. Use animation para feedback visual automático (ex: loaders, alertas, notificações).
+. Sempre combine com duration, ease e delay para dar mais naturalidade.
+. Evite exagerar em muitos elementos animados ao mesmo tempo → pode pesar na performance.
+-->
