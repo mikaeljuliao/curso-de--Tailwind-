@@ -1,0 +1,162 @@
+<!--
+📌 Criando uma página de hotéis – Parte 1 (Header)
+
+🎯 Objetivo da aula:
+O foco dessa etapa é montar a parte do topo (header) da página de hotéis, que normalmente contém:
+. Logo do hotel ou marca (identidade visual).
+. Menu de navegação (links) para as principais seções do site (ex: Home, Quartos, Serviços, Contato, etc).
+. Organização e responsividade inicial para o header.
+
+
+
+🔹 Estrutura básica em HTML (Exemplo profissional):
+<header class="flex items-center justify-between px-6 py-4 bg-white shadow-md">
+  - Logo 
+  <div class="text-2xl font-bold text-blue-600">
+    HotelLux
+  </div>
+
+  - Menu 
+  <nav>
+    <ul class="flex space-x-6 text-gray-700 font-medium">
+      <li><a href="#" class="hover:text-blue-600">Início</a></li>
+      <li><a href="#" class="hover:text-blue-600">Quartos</a></li>
+      <li><a href="#" class="hover:text-blue-600">Serviços</a></li>
+      <li><a href="#" class="hover:text-blue-600">Galeria</a></li>
+      <li><a href="#" class="hover:text-blue-600">Contato</a></li>
+      <li><a href="#" class="hover:text-blue-600">Reservar</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+🔎 Explicação:
+. flex items-center justify-between → posiciona a logo de um lado e o menu do outro.
+. px-6 py-4 → padding interno para espaçamento.
+. bg-white shadow-md → fundo branco e uma sombra leve.
+. ul.flex.space-x-6 → cria um menu horizontal espaçado.
+. hover:text-blue-600 → muda a cor no hover.
+
+
+
+🔹 Trabalhando com a logo:
+A logo pode ser um texto simples ou uma imagem:
+
+<div class="flex items-center">
+  <img src="logo.png" alt="HotelLux Logo" class="h-10 w-auto">
+</div>
+
+
+
+🔹 Tornando o header responsivo:
+Em telas menores, o menu deve se adaptar (menu hamburguer ou em coluna).
+
+- Menu Desktop 
+<nav class="hidden md:block">
+  <ul class="flex space-x-6 text-gray-700 font-medium">
+    <li><a href="#">Início</a></li>
+    <li><a href="#">Quartos</a></li>
+    <li><a href="#">Serviços</a></li>
+    <li><a href="#">Contato</a></li>
+  </ul>
+</nav>
+
+- Botão Mobile 
+<button class="md:hidden text-gray-700">
+  - Ícone hamburguer 
+  ☰
+</button>
+
+🔹 Boas práticas:
+. Acessibilidade: usar <nav> e alt nas imagens da logo.
+. Clareza: menus com nomes curtos e objetivos.
+. Design limpo: evitar poluição visual.
+. Consistência: manter o mesmo estilo em todas as páginas.
+
+
+
+🔹 Exemplo final do header (versão aprimorada):
+<header class="flex items-center justify-between px-6 py-4 bg-white shadow-md">
+  - Logo 
+  <div class="flex items-center space-x-2">
+    <img src="logo.png" alt="HotelLux Logo" class="h-10 w-auto">
+    <span class="text-2xl font-bold text-blue-600">HotelLux</span>
+  </div>
+
+  - Menu 
+  <nav class="hidden md:block">
+    <ul class="flex space-x-6 text-gray-700 font-medium">
+      <li><a href="#" class="hover:text-blue-600">Início</a></li>
+      <li><a href="#" class="hover:text-blue-600">Quartos</a></li>
+      <li><a href="#" class="hover:text-blue-600">Serviços</a></li>
+      <li><a href="#" class="hover:text-blue-600">Galeria</a></li>
+      <li><a href="#" class="hover:text-blue-600">Contato</a></li>
+      <li>
+        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+          Reservar
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  - Mobile 
+  <button class="md:hidden text-gray-700 text-2xl">
+    ☰
+  </button>
+</header>
+
+
+
+🔹 Código original da aula (base simples):
+Esse foi o exato código usado no vídeo:
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  - Heroicons 
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+  <div>
+    - header
+    <div class="container mx-auto px-24 flex items-center">
+      - Logo 
+      <div class="font-black">
+        LOGO
+      </div>
+      - Menu 
+      <ul class="ml-auto">
+        <li>
+          <a href="#" class="text-sm text-gray-600 hover:text-gray-800 hover:underline">Como reservar</a>
+          <a href="#" class="ml-6 text-sm text-gray-600 hover:text-gray-800 hover:underline">Sobre nós</a>
+          <a href="#" class="ml-6 text-sm text-gray-600 hover:text-gray-800 hover:underline">Introduções</a>
+          <a href="#" class="ml-6 text-sm text-gray-600 hover:text-gray-800 hover:underline">Contato</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>
+
+🔎 Diferença entre os dois códigos
+. Código da aula:
+   . Estrutura simples.
+   . Apenas logo em texto + links lado a lado.
+   . Não tem responsividade.
+   . Usa Feather Icons para preparar ícones no futuro.
+
+Código aprimorado:
+   . Estrutura já responsiva (menu desktop + mobile).
+   . Logo com imagem e texto.
+   . Botão destacado de "Reservar".
+   . Mais próximo de um projeto real.
+
+-->

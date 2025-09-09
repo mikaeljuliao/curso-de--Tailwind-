@@ -1,0 +1,332 @@
+<!--
+
+
+Aula #18 – Componente Dropdown no Tailwind CSS
+O Dropdown é um componente de interface muito usado em menus, botões de ações e seletores. Ele permite mostrar uma lista de opções somente quando o usuário interage com algum elemento (como um botão).
+
+No Tailwind CSS, você pode construir dropdowns combinando classes utilitárias com um pouco de JavaScript (ou React, se preferir) para controlar a abertura e o fechamento.
+
+
+
+1. Estrutura básica de um Dropdown:
+Um dropdown geralmente é composto por:
+. Trigger (gatilho): o botão ou link que abre o menu.
+. Menu: a lista de opções exibida.
+. Itens do menu: links, botões ou ações dentro do dropdown.
+
+Exemplo simples:
+<div class="relative inline-block text-left">
+  - Botão de abertura -
+  <button class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+    Opções
+    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+ - Menu Dropdown 
+  <div class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+    <div class="py-1">
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configurações</a>
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sair</a>
+    </div>
+  </div>
+</div>
+
+
+👉 Nesse exemplo:
+. O relative no container permite posicionar o menu em relação ao botão.
+. O absolute no dropdown posiciona o menu.
+. O shadow-lg e ring criam estilo de sobreposição.
+. O hover:bg-gray-100 destaca os itens ao passar o mouse.
+
+
+
+2. Controle de exibição:
+O Tailwind não tem lógica embutida, então o menu precisa de JavaScript para abrir/fechar.
+Por exemplo (em React ou JS puro):
+
+import { useState } from "react";
+
+export default function Dropdown() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="relative inline-block text-left">
+      <button
+        onClick={() => setOpen(!open)}
+        className="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Opções
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configurações</a>
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sair</a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
+3. Direção e posicionamento:
+Você pode controlar onde o menu aparece com utilitários do Tailwind:
+. right-0 → abre alinhado à direita.
+. left-0 → abre alinhado à esquerda.
+. mt-2 → define o espaçamento vertical.
+. origin-top-right ou origin-top-left → controla o ponto de origem para animações (usando transform scale).
+
+Exemplo para abrir alinhado à esquerda:
+
+<div class="absolute left-0 mt-2 w-48 origin-top-left bg-white shadow-lg rounded-md">
+  ...
+</div>
+
+
+
+
+4. Estilizando itens do Dropdown:
+Você pode usar diversas classes para personalizar os itens:
+. hover:bg-gray-100 → destaque ao passar o mouse.
+. focus:bg-gray-100 → acessibilidade ao navegar com TAB.
+. divide-y divide-gray-200 → adiciona divisores entre os itens.
+. font-medium text-gray-700 → controla estilo da fonte.
+
+Exemplo com divisores:
+<div class="py-1 divide-y divide-gray-200">
+  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configurações</a>
+  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sair</a>
+</div>
+
+
+
+
+5. Dropdown com ícones:
+Você pode incluir ícones do Heroicons ou Lucide ao lado dos itens.
+Exemplo com ícones de status (ativo, inativo, em progresso):
+
+<div class="py-1">
+  <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clip-rule="evenodd" />
+    </svg>
+    Ativo
+  </a>
+  <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+    <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M6.707 6.707a1 1 0 010-1.414L10 2l3.293 3.293a1 1 0 01-1.414 1.414L10 4.414 8.121 6.293a1 1 0 01-1.414 0zM4 10a6 6 0 1112 0 6 6 0 01-12 0z" clip-rule="evenodd" />
+    </svg>
+    Inativo
+  </a>
+  <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+    <svg class="w-4 h-4 text-yellow-500 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    Em progresso
+  </a>
+</div>
+
+
+
+
+
+6. Animações no Dropdown:
+Com Tailwind, você pode usar transition e transform para criar animações de abertura/fechamento:
+
+<div class="absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-md shadow-lg transform transition duration-200 ease-out scale-95 opacity-0">
+  - Quando aberto, trocar por scale-100 opacity-100 
+</div>
+
+Isso dá a sensação de fade + zoom suave.
+
+
+
+Resumo:
+. Estrutura: precisa de relative no container e absolute no menu.
+. Controle: feito via JS (React ou Vanilla).
+. Posicionamento: use right-0, left-0, mt-*, origin-*.
+. Estilo: hover, focus, ring, shadow, divide.
+. Ícones: integre com Heroicons ou Lucide.
+. Animações: use transform scale + transition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🔹 Versão 1 – HTML + JS puro (com Heroicons via CDN)
+
+Aqui o dropdown abre e fecha clicando no botão, sem precisar de React.
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+ - Heroicons 
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+  <div class="relative inline-block text-left">
+    - Botão 
+    <button id="dropdownButton" class="inline-flex items-center justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+      Menu
+      <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+
+    - Dropdown 
+    <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition">
+      <div class="py-1">
+        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+          Dashboard
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Criar Novo
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+          </svg>
+          Histórico
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.761 0 5.304.896 7.121 2.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Perfil
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />
+          </svg>
+          Relatórios
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+          </svg>
+          Sair
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const button = document.getElementById("dropdownButton");
+    const menu = document.getElementById("dropdownMenu");
+
+    button.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+
+    // Fechar dropdown ao clicar fora
+    window.addEventListener("click", (e) => {
+      if (!button.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+✅ Esse já funciona em qualquer projeto HTML.
+
+Tem 6 links.
+
+Usa ícones Heroicons.
+
+Fecha quando clica fora.
+
+🔹 Versão 2 – React (com Heroicons instalados via npm)
+
+Caso prefira em React, instale:
+
+npm install @heroicons/react
+
+
+E o código ficaria assim:
+
+import { useState } from "react";
+import { ChevronDownIcon, HomeIcon, PlusIcon, ClockIcon, UserIcon, DocumentReportIcon, LogoutIcon } from "@heroicons/react/solid";
+
+export default function Dropdown() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="relative inline-block text-left">
+      <button
+        onClick={() => setOpen(!open)}
+        className="inline-flex items-center justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Menu
+        <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-500" />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <HomeIcon className="w-4 h-4 mr-2 text-blue-500" /> Dashboard
+            </a>
+            <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <PlusIcon className="w-4 h-4 mr-2 text-green-500" /> Criar Novo
+            </a>
+            <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <ClockIcon className="w-4 h-4 mr-2 text-yellow-500" /> Histórico
+            </a>
+            <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <UserIcon className="w-4 h-4 mr-2 text-purple-500" /> Perfil
+            </a>
+            <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <DocumentReportIcon className="w-4 h-4 mr-2 text-gray-600" /> Relatórios
+            </a>
+            <a href="#" className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-100">
+              <LogoutIcon className="w-4 h-4 mr-2 text-red-500" /> Sair
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+👉 Mikael, prefere que eu prepare um dropdown animado (com transição suave de abrir/fechar) ou quer deixar ele simples e direto c
+
+
+
+
+-->
