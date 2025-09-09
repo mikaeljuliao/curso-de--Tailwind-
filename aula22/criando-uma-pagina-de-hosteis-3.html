@@ -1,0 +1,83 @@
+<!--
+
+📘 Aula 23 – Criando seção Resort em Destaque com Flexbox
+
+
+📝 O que foi feito:
+Nesta aula, criamos uma seção de destaque para apresentar um resort, aplicando conceitos de layout responsivo utilizando Flexbox do Tailwind CSS.
+
+A ideia foi dividir a tela em dois blocos principais:
+. Texto de apresentação do resort (lado esquerdo).
+. Imagem ilustrativa do resort (lado direito).
+
+
+
+📂 Estrutura do Código:
+
+1. Container Principal
+<div class="container mx-auto px-4 py-10">
+
+. container → centraliza o conteúdo.
+. mx-auto → aplica margem automática nas laterais, deixando o container no centro da tela.
+. px-4 py-10 → adiciona espaçamento interno (padding) nas laterais e em cima/baixo.
+
+
+2. Flexbox:
+<div class="flex">
+
+. Iniciamos um layout flexível com flex.
+. Esse flex distribui os elementos filhos em linha (horizontalmente).
+
+
+
+3. Bloco de Texto (lado esquerdo):
+<div class="flex-grow-1 pr-10">
+  <div>
+    <div class="text-sm text-gray-400 font-medium">RESORT EM DESTAQUE</div>
+    <div class="text-2xl">Ecoresort Praia do Forte Bahia</div>
+    <div class="text-sm text-gray-400 font-medium mt-2">Hotel qualidade 5 estrelas</div>
+    <div class="text-sm text-gray-400 font-medium mt-4">
+      <p>Lorem ipsum dolor sit amet consectetur 
+        adipisicing elit. Autem voluptas odio ea 
+        nisi! Dolor similique provident animi modi 
+        nobis, aliquid fugit necessitatibus quis 
+        suscipit totam, eos accusamus labore 
+        numquam. Voluptatum!</p>
+    </div>
+    <div class="mt-4">
+      <button class="text-yellow-900 inline-flex bg-yellow-500 px-3 py-2 rounded">
+        Solicitar reservas
+      </button>
+    </div>
+  </div>
+</div>
+
+. flex-grow-1 → faz o bloco de texto crescer para ocupar mais espaço.
+. pr-10 → adiciona espaçamento à direita (para afastar do bloco da imagem).
+. Conteúdo interno:
+. Pequeno título (RESORT EM DESTAQUE).
+. Nome do resort com destaque (text-2xl).
+. Subtítulo com estrelas.
+. Parágrafo descritivo (mt-4 cria respiro).
+. Botão de ação para reservas, estilizado em amarelo com bordas arredondadas.
+
+
+
+
+4. Bloco da Imagem (lado direito):
+<div class="flex-shrink-0 ml-auto">
+  <img src="../img/paisagem-com-ccqueiros.jpg" width="450">
+</div>
+
+. flex-shrink-0 → evita que a imagem diminua quando o espaço for reduzido.
+. ml-auto → empurra o bloco da imagem para a extrema direita.
+. img → adiciona a imagem com largura fixa de 450px.
+
+
+
+🎯 Resultado da Aula:
+. Criamos uma seção limpa e organizada com Flexbox.
+. O texto e a imagem ficaram lado a lado.
+. O botão de "Solicitar reservas" dá um ar de call-to-action (CTA).
+. Esse modelo pode ser usado em landing pages de hotéis, resorts, produtos ou serviços.
+-->
